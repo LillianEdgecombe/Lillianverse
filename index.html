@@ -23,37 +23,9 @@
     </section>
     <section class="prologue">
       <h2>Prologue</h2>
-      <div class="markdown">
-        <pre>
-*London. Late autumn. Damp leaves, dim lights, and a badger lost in thought.*
-
-Lillian Edgecombe walks home from the Academy with her scarf tugged up to her snout and her mind wrapped tight around Marisol. The young vixen had stormed out of rehearsal again—fur bristling, cello bow left behind like a gauntlet. So much talent, so much anger. Lillian had seen that spark before, in herself, in others. It could be brilliance. Or it could burn everything down.
-
-The streetlights blur as she blinks too long. A chilly drizzle clings to her coat’s shoulders, soaking in. Her paws are stiff from cold and overuse, her bag too heavy with papers she won’t grade tonight. She turns onto Mandela Street, where the houses lean in like old friends and the concrete still remembers their younger footsteps.
-
-Her thoughts drift—first to Marisol, then to the band, then to Miles. Their words earlier had been quiet, but sharp. He’d stood in the kitchen doorway, ears pinned back, voice low.
-
->“You’re burning the candle from both ends again, love.”
->“I’m fine.”
->“You haven’t been fine for days.”
->“And what would you have me do, Miles? Let them slip through the cracks?”
-
-She hadn’t waited for his reply. She hadn’t wanted to hear his hurt.
-
-Her boots splash through a shallow puddle. She doesn’t notice the delivery van edging out of the alley. It’s silent on electric wheels, the driver checking their holoscreen. By the time Lillian looks up, it’s too late.
-
-White headlights catch the silver in her whiskers.
-
-The world jerks sideways. A flash—bright, deafening—and then a soft, sudden silence.
-
-She feels weightless, falling backward into velvet dark. Time frays. Thoughts scatter. Music notes, faces, laughter—familiar and unfamiliar—rush past her like pages in a book torn loose.
-
-Her last conscious image is of a hallway not from this world: endless doors, and behind them, lives she doesn’t yet remember living.
-
-And then—
-Nothing.
-        </pre>
-      </div>
+       <div class="markdown" id="prologue-container">
+        Loading prologue...
+       </div>
     </section>
     <p>
       <a href="hub1.html" class="main-link">Begin Your Journey &rarr;</a>
@@ -65,5 +37,17 @@ Nothing.
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+<script>
+fetch('assets/prologue.txt')
+  .then(response => response.text())
+  .then(text => {
+    // If you want to keep the preformatted style:
+    document.getElementById('prologue-container').innerHTML = `<pre>${text}</pre>`;
+    // Or, if you want markdown rendering, you'll need a markdown library
+  })
+  .catch(err => {
+    document.getElementById('prologue-container').textContent = 'Could not load prologue.';
+  });
+</script>
 </body>
 </html>
