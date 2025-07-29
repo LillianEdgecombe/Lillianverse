@@ -8,11 +8,11 @@ The streetlights blurred as she blinked too long. A chilly drizzle was clinging 
 Her thoughts slowly started drifting int he calm alleys—first to Marisol, then to the band, then to Miles. Their words earlier had been quiet, but sharp. He’d stood in the kitchen doorway, ears pinned back, voice low.
 
 >“You’re burning the candle from both ends again, love.”
-
+>
 >“I’m fine.”
-
+>
 >“You haven’t been fine for days.”
-
+>
 >“And what would you have me do, Miles? Let them slip through the cracks? Let them go away and crash-burn themselves? When you know-when *I* know I can make them feel fine?”
 
 She hadn’t waited for his reply. She hadn’t wanted to hear his hurt.
