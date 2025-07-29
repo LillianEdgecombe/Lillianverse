@@ -37,8 +37,9 @@
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script
 <script>
-fetch('assets/prologue.txt') // You can use .txt if you prefer, but .md is clearer.
+fetch('assets/prologue.md') // You can use .txt if you prefer, but .md is clearer.
   .then(response => response.text())
   .then(text => {
     document.getElementById('prologue-container').innerHTML = marked.parse(text);
@@ -47,6 +48,6 @@ fetch('assets/prologue.txt') // You can use .txt if you prefer, but .md is clear
     document.getElementById('prologue-container').textContent = 'Could not load prologue.';
   });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+>
 </body>
 </html>
