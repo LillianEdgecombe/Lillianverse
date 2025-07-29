@@ -38,16 +38,15 @@
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
 <script>
-fetch('assets/prologue.txt')
+fetch('assets/prologue.txt') // You can use .txt if you prefer, but .md is clearer.
   .then(response => response.text())
   .then(text => {
-    // If you want to keep the preformatted style:
-    document.getElementById('prologue-container').innerHTML = `<pre>${text}</pre>`;
-    // Or, if you want markdown rendering, you'll need a markdown library
+    document.getElementById('prologue-container').innerHTML = marked.parse(text);
   })
   .catch(err => {
     document.getElementById('prologue-container').textContent = 'Could not load prologue.';
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
