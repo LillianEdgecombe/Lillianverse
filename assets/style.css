@@ -66,3 +66,40 @@ footer a {
   font-size: 1em;
   white-space: pre-wrap;
 }
+
+#subway-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: #fff;
+  z-index: 1000;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  padding-bottom: 8px;
+}
+#subway-nav svg {
+  display: block;
+  margin: 0 auto;
+}
+#subway-nav circle {
+  fill: #ccc;
+  stroke: #444;
+  stroke-width: 3;
+  transition: fill 0.2s;
+  cursor: pointer;
+}
+#subway-nav circle.active {
+  fill: #2196f3;
+  stroke: #1976d2;
+}
+#subway-nav .station-labels {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px;
+  font-size: 0.9em;
+  color: #333;
+}
+#subway-nav .station-labels span {
+  width: 80px;
+  text-align: center;
+}
