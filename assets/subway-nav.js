@@ -82,7 +82,7 @@
     // Line from Hub to Universe
     lines += `<line x1="${hubX}" y1="${hubY}" x2="${ux}" y2="${uy}" stroke="${u.color}" stroke-width="7"/>`;
 
-    // Each universe node points to its own index.html
+    // Universe node points to its index.html
     stations += `<a href="/${u.name}/index.html" data-title="${u.name}"><circle cx="${ux}" cy="${uy}" r="15" fill="${u.color}" stroke="#222" stroke-width="3"/></a>`;
 
     // User icon if in current universe
@@ -117,11 +117,52 @@
     </div>
   `;
 
-  // Inject the subway nav at the end of the body
+  // Utility: Replace nav bar beneath header
   document.addEventListener("DOMContentLoaded", function() {
-    document.body.insertAdjacentHTML('beforeend', subwayHTML);
+    // Find header and nav bar beneath it
+    const header = document.querySelector('header');
+    let navBar = null;
+    if (header) {
+      // Find next sibling nav (could be <nav>, or a div with class 'navbar', etc)
+      navBar = header.nextElementSibling;
+      // If next sibling is not nav bar, look for .navbar or nav in immediate siblings
+      if (navBar && !(navBar.tagName === 'NAV' || navBar.classList.contains('navbar'))) {
+        navBar = null;
+        let sibling = header.nextElementSibling;
+        while(sibling) {
+          if (sibling.tagName === 'NAV' || sibling.classList.contains('navbar')) {
+            navBar = sibling;
+            break;
+          }
+          sibling = sibling.nextElementSibling;
+        }
+      }
+    }
+    // Replace nav bar if found, otherwise insert after header
+    if (navBar) {
+      navBar.parentNode.replaceChild(
+        (function() {
+          const div = document.createElement('div');
+          div.innerHTML = subwayHTML;
+          return div.firstElementChild;
+        })(),
+        navBar
+      );
+    } else if (header) {
+      header.parentNode.insertBefore(
+        (function() {
+          const div = document.createElement('div');
+          div.innerHTML = subwayHTML;
+          return div.firstElementChild;
+        })(),
+        header.nextElementSibling
+      );
+    } else {
+      // Fallback: Insert at top of body
+      document.body.insertAdjacentHTML('afterbegin', subwayHTML);
+    }
 
-    // Add tooltip event listeners (delegated)
+    // Tooltip event listeners (delegated)
     const nav = document.getElementById('subway-nav');
     if (nav) {
       nav.addEventListener('mousemove', function(evt) {
