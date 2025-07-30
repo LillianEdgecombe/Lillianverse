@@ -10,26 +10,28 @@
     <img src="assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
   </header>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="project.html" class="active">About</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
     <a href="hub1.html">First Hub</a>
   </nav>
   <main>
     <h1>Welcome to the Lillianverse!</h1>
     <section class="blurb">
-      <p>Have you ever tried to imagine how would your life have been if you took a different choice? And what if you lived in another time? Or were a different person entirely? If you said 'yes' to at least one of those questions, enter the Lillianverse!</p>
-      <p>In the Lillianverse, each story tells a different version of the same character, Lillian, each time with a different twist: a different occupation, a different life history, a different epoch, a different sex or even species. All stories are organized by theme.</p>
-      <p>Have fun and enjoy the differences!</p>
+      <p>Welcome to the Lillianverse! This is your starting point for exploring the many different lives and stories of Lillian.</p>
+      <p>Choose your path:</p>
     </section>
-    <section class="prologue">
-      <h2>Prologue</h2>
-       <div class="markdown" id="prologue-container">
-        Loading prologue...
-       </div>
-    </section>
-    <p>
-      <a href="hub1.html" class="main-link">Begin Your Journey &rarr;</a>
-    </p>
+    <div class="navigation-options">
+      <div class="nav-option">
+        <h2>Learn More</h2>
+        <p>Discover what the Lillianverse is all about</p>
+        <a href="about.html" class="main-link">About the Lillianverse &rarr;</a>
+      </div>
+      <div class="nav-option">
+        <h2>Begin Your Journey</h2>
+        <p>Start exploring the different universes and stories</p>
+        <a href="hub1.html" class="main-link">Enter the First Hub &rarr;</a>
+      </div>
+    </div>
   </main>
   <footer>
     <a href="#" id="discord-link">Discord</a>
@@ -38,17 +40,6 @@
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
 
-<script>
-fetch('assets/prologue.md')
-  .then(response => response.text())
-  .then(text => {
-    document.getElementById('prologue-container').innerHTML = marked.parse(text);
-  })
-  .catch(err => {
-    document.getElementById('prologue-container').textContent = 'Could not load prologue.';
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="assets/subway-nav.js"></script>
+   <script src="/assets/subway-nav.js"></script>
 </body>
 </html>
