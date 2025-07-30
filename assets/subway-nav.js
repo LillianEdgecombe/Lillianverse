@@ -13,30 +13,22 @@
   ];
 
   // SVG geometry
-  const svgWidth = 800, svgHeight = 340;
+  const svgWidth = 800, svgHeight = 370;
   const homeX = svgWidth / 2, homeY = 40;
   const aboutX = svgWidth / 2 - 120, aboutY = 110;
   const hubX = svgWidth / 2 + 120, hubY = 110;
-  const universeRadius = 100;
-  const hubAngle = Math.PI / 2; // Downwards
-  const fanStart = Math.PI * 0.85;
-  const fanEnd = Math.PI * 0.15;
+  const universeRadius = 120;
   const stationR = 17;
 
-  // Current location detection
-  const path = window.location.pathname;
-  const currentPage = path.split("/").filter(Boolean).pop() || "index.html";
-  const matchVerse = path.match(/\/([A-Za-z]+verse)\//);
-  const currentVerse = matchVerse ? matchVerse[1].toLowerCase() : null;
-
   // Tooltip div (HTML, styled)
-  if (!document.getElementById('subway-tooltip')) {
-    const tooltip = document.createElement('div');
+  let tooltip = document.getElementById('subway-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
     tooltip.id = 'subway-tooltip';
     tooltip.style.position = 'fixed';
     tooltip.style.pointerEvents = 'none';
-    tooltip.style.zIndex = 9999;
-    tooltip.style.padding = '5px 13px';
+    tooltip.style.zIndex = '9999';
+    tooltip.style.padding = '7px 16px';
     tooltip.style.background = 'rgba(0,32,64,0.97)';
     tooltip.style.color = '#fff';
     tooltip.style.borderRadius = '7px';
@@ -46,17 +38,23 @@
     tooltip.style.visibility = 'hidden';
     document.body.appendChild(tooltip);
   }
+
+  // Tooltip logic (encapsulated)
   function showTooltip(text, evt) {
-    const tooltip = document.getElementById('subway-tooltip');
     tooltip.textContent = text;
-    tooltip.style.left = (evt.clientX + 12) + 'px';
+    tooltip.style.left = (evt.clientX + 14) + 'px';
     tooltip.style.top = (evt.clientY - 10) + 'px';
     tooltip.style.visibility = 'visible';
   }
   function hideTooltip() {
-    const tooltip = document.getElementById('subway-tooltip');
     tooltip.style.visibility = 'hidden';
   }
+
+  // Current location detection
+  const path = window.location.pathname;
+  const currentPage = path.split("/").filter(Boolean).pop() || "index.html";
+  const matchVerse = path.match(/\/([A-Za-z]+verse)\//);
+  const currentVerse = matchVerse ? matchVerse[1].toLowerCase() : null;
 
   // SVG elements
   let lines = '';
@@ -68,9 +66,9 @@
   lines += `<line x1="${homeX}" y1="${homeY}" x2="${hubX}" y2="${hubY}" stroke="#4caf50" stroke-width="7"/>`;
 
   // Stations: Home, About, Hub
-  stations += `<a href="/index.html" onmouseenter="showTooltip('Home',event)" onmouseleave="hideTooltip()"><circle cx="${homeX}" cy="${homeY}" r="${stationR+3}" fill="#2196f3" stroke="#222" stroke-width="3"/></a>`;
-  stations += `<a href="/about.html" onmouseenter="showTooltip('About',event)" onmouseleave="hideTooltip()"><circle cx="${aboutX}" cy="${aboutY}" r="${stationR}" fill="#607d8b" stroke="#222" stroke-width="3"/></a>`;
-  stations += `<a href="/hub1.html" onmouseenter="showTooltip('Hub',event)" onmouseleave="hideTooltip()"><circle cx="${hubX}" cy="${hubY}" r="${stationR}" fill="#4caf50" stroke="#222" stroke-width="3"/></a>`;
+  stations += `<a href="/index.html" data-title="Home"><circle cx="${homeX}" cy="${homeY}" r="${stationR+3}" fill="#2196f3" stroke="#222" stroke-width="3"/></a>`;
+  stations += `<a href="/about.html" data-title="About"><circle cx="${aboutX}" cy="${aboutY}" r="${stationR}" fill="#607d8b" stroke="#222" stroke-width="3"/></a>`;
+  stations += `<a href="/hub1.html" data-title="Hub"><circle cx="${hubX}" cy="${hubY}" r="${stationR}" fill="#4caf50" stroke="#222" stroke-width="3"/></a>`;
 
   // Universe branches: fan out from hub node
   const fanSpread = Math.PI * 0.9; // 162°
@@ -84,8 +82,8 @@
     // Line from Hub to Universe
     lines += `<line x1="${hubX}" y1="${hubY}" x2="${ux}" y2="${uy}" stroke="${u.color}" stroke-width="7"/>`;
 
-    // Station with tooltip
-    stations += `<a href="/${u.name}/" onmouseenter="showTooltip('${u.name}',event)" onmouseleave="hideTooltip()"><circle cx="${ux}" cy="${uy}" r="15" fill="${u.color}" stroke="#222" stroke-width="3"/></a>`;
+    // Each universe node points to its own index.html
+    stations += `<a href="/${u.name}/index.html" data-title="${u.name}"><circle cx="${ux}" cy="${uy}" r="15" fill="${u.color}" stroke="#222" stroke-width="3"/></a>`;
 
     // User icon if in current universe
     if (u.name.toLowerCase() === currentVerse)
@@ -117,14 +115,24 @@
         ${userIcon}
       </svg>
     </div>
-    <script>
-      window.showTooltip = ${showTooltip.toString()};
-      window.hideTooltip = ${hideTooltip.toString()};
-    </script>
   `;
 
   // Inject the subway nav at the end of the body
   document.addEventListener("DOMContentLoaded", function() {
     document.body.insertAdjacentHTML('beforeend', subwayHTML);
+
+    // Add tooltip event listeners (delegated)
+    const nav = document.getElementById('subway-nav');
+    if (nav) {
+      nav.addEventListener('mousemove', function(evt) {
+        const el = evt.target.closest('a[data-title]');
+        if (el) {
+          showTooltip(el.getAttribute('data-title'), evt);
+        } else {
+          hideTooltip();
+        }
+      });
+      nav.addEventListener('mouseleave', hideTooltip);
+    }
   });
 })();
