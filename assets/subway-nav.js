@@ -1,25 +1,64 @@
 (function() {
-  // Subway map HTML
+  // Define universes and their properties
+  const universes = [
+    { name: "Dramaverse", color: "#e53935" },
+    { name: "Funverse", color: "#8e24aa" },
+    { name: "Historyverse", color: "#3949ab" },
+    { name: "Horroverse", color: "#00897b" },
+    { name: "Kinkyverse", color: "#fbc02d" },
+    { name: "Prime", color: "#fb8c00" },
+    { name: "Techverse", color: "#43a047" }
+  ];
+
+  // SVG layout
+  const startX = 50, gap = 100, y = 30, stationR = 15;
+  const svgWidth = startX * 2 + gap * (universes.length - 1);
+
+  // Get current universe from URL
+  const path = window.location.pathname;
+  const match = path.match(/\\/([A-Za-z]+verse)\\//);
+  const currentVerse = match ? match[1] : null;
+
+  // Build SVG lines and stations
+  let lines = '';
+  let stations = '';
+  let userIcon = '';
+  universes.forEach((u, i) => {
+    // Draw line segment (except for the last station)
+    if (i < universes.length - 1) {
+      const x1 = startX + gap * i;
+      const x2 = startX + gap * (i + 1);
+      lines += `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${u.color}" stroke-width="8"/>`;
+    }
+    // Draw station
+    const cx = startX + gap * i;
+    stations += `<a href="/${u.name}/"><circle id="station-${u.name.toLowerCase()}" cx="${cx}" cy="${y}" r="${stationR}" fill="${u.color}" stroke="#222" stroke-width="3"/></a>`;
+    // Draw user icon if this is the current universe
+    if (u.name.toLowerCase() === (currentVerse ? currentVerse.toLowerCase() : '')) {
+      userIcon = `<g>
+        <circle cx="${cx}" cy="${y}" r="10" fill="#fff" stroke="#222" stroke-width="2"/>
+        <circle cx="${cx}" cy="${y-3}" r="5" fill="#2196f3"/>
+        <rect x="${cx-4}" y="${y+2}" width="8" height="6" rx="2" fill="#2196f3"/>
+      </g>`;
+    }
+  });
+
+  // Build station labels
+  let labels = '';
+  universes.forEach((u, i) => {
+    labels += `<span style="color:${u.color};width:80px;text-align:center;">${u.name}</span>`;
+  });
+
+  // Compose HTML
   const subwayHTML = `
     <div id="subway-nav">
-      <svg width="100%" height="60" viewBox="0 0 700 60">
-        <line x1="50" y1="30" x2="650" y2="30" stroke="#888" stroke-width="8"/>
-        <a href="/Dramaverse/"><circle id="station-dramaverse" cx="50" cy="30" r="15" /></a>
-        <a href="/Funverse/"><circle id="station-funverse" cx="150" cy="30" r="15" /></a>
-        <a href="/Historyverse/"><circle id="station-historyverse" cx="250" cy="30" r="15" /></a>
-        <a href="/Horroverse/"><circle id="station-horroverse" cx="350" cy="30" r="15" /></a>
-        <a href="/Kinkyverse/"><circle id="station-kinkyverse" cx="450" cy="30" r="15" /></a>
-        <a href="/Prime/"><circle id="station-prime" cx="550" cy="30" r="15" /></a>
-        <a href="/Techverse/"><circle id="station-techverse" cx="650" cy="30" r="15" /></a>
+      <svg width="100%" height="60" viewBox="0 0 ${svgWidth} 60">
+        ${lines}
+        ${stations}
+        ${userIcon}
       </svg>
-      <div class="station-labels">
-        <span>Dramaverse</span>
-        <span>Funverse</span>
-        <span>Historyverse</span>
-        <span>Horroverse</span>
-        <span>Kinkyverse</span>
-        <span>Prime</span>
-        <span>Techverse</span>
+      <div class="station-labels" style="display:flex;justify-content:space-between;margin:0 40px;font-size:0.9em;">
+        ${labels}
       </div>
     </div>
   `;
@@ -27,21 +66,5 @@
   // Inject the subway nav at the end of the body
   document.addEventListener("DOMContentLoaded", function() {
     document.body.insertAdjacentHTML('beforeend', subwayHTML);
-
-    // Highlight current verse
-    const verseMap = {
-      "Dramaverse": "station-dramaverse",
-      "Funverse": "station-funverse",
-      "Historyverse": "station-historyverse",
-      "Horroverse": "station-horroverse",
-      "Kinkyverse": "station-kinkyverse",
-      "Prime": "station-prime",
-      "Techverse": "station-techverse"
-    };
-    const path = window.location.pathname;
-    const match = path.match(/\/([A-Za-z]+verse)\//);
-    if (match && verseMap[match[1]]) {
-      document.getElementById(verseMap[match[1]]).classList.add('active');
-    }
   });
-})(); 
+})();
