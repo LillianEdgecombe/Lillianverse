@@ -16,7 +16,7 @@
 
   // Get current universe from URL
   const path = window.location.pathname;
-  const match = path.match(/\\/([A-Za-z]+verse)\\//);
+  const match = path.match(/\/([A-Za-z]+verse)\//);
   const currentVerse = match ? match[1] : null;
 
   // Build SVG lines and stations
@@ -67,4 +67,4 @@
   document.addEventListener("DOMContentLoaded", function() {
     document.body.insertAdjacentHTML('beforeend', subwayHTML);
   });
-})();
+})(); 
