@@ -82,24 +82,12 @@ subway-nav svg {
   margin: 0 auto;
 }
 subway-nav circle {
-  fill: #ccc;
-  stroke: #444;
-  stroke-width: 3;
-  transition: fill 0.2s;
   cursor: pointer;
+  transition: filter 0.2s;
 }
-subway-nav circle.active {
-  fill: #2196f3;
-  stroke: #1976d2;
-}
-subway-nav .station-labels {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 40px;
-  font-size: 0.9em;
-  color: #333;
+subway-nav circle:hover {
+  filter: brightness(1.2);
 }
 subway-nav .station-labels span {
-  width: 80px;
-  text-align: center;
+  font-weight: bold;
 }
