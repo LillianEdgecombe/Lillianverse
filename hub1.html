@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="First Hub - Begin your journey through the Lillianverse storytelling multiverse.">
   <title>First Hub | Lillianverse</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
   <header>
     <img src="assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
   </header>
@@ -17,23 +20,27 @@
   </nav>
   <main>
     <h1>The Hallway of Doors</h1>
-    <p>Welcome to the First Hub! This is where your journey through the Lillianverse begins. Here you'll find the foundational stories and can proceed to explore the different themed universes.</p>
+    <p class="intro-text">Welcome to the First Hub! This is where your journey through the Lillianverse begins. Here you'll find the foundational stories and can proceed to explore the different themed universes.</p>
     
     <section class="hub-section">
       <h2>Individual Stories</h2>
       <p>Choose a door to read the first set of Lillian's stories:</p>
       <ul>
-        <li><a href="stories/story1.html">Story 1 (placeholder)</a></li>
-        <li><a href="stories/story2.html">Story 2 (placeholder)</a></li>
-        <li><a href="stories/story3.html">Story 3 (placeholder)</a></li>
-        <li><a href="stories/story4.html">Story 4 (placeholder)</a></li>
-        <li><a href="stories/story5.html">Story 5 (placeholder)</a></li>
+        <li><a href="stories/story1.html">The Beginning - Lillian's Origin Story</a></li>
+        <li><a href="stories/story2.html">First Choices - The Path Diverges</a></li>
+        <li><a href="stories/story3.html">Echoes - Ripples Across Realities</a></li>
+        <li><a href="stories/story4.html">Connections - When Worlds Collide</a></li>
+        <li><a href="stories/story5.html">Infinite - The Multiverse Revealed</a></li>
       </ul>
+      <p><em>Note: Individual stories are being developed. Check back soon for these foundational tales!</em></p>
     </section>
 
     <section class="hub-section">
       <h2>Proceed to the Main Station</h2>
-      <p>Ready to explore the themed universes? Each universe contains multiple stories centered around a specific theme or genre.</p>
+      <p>Ready to explore the themed universes? The Main Station is where you can access all the different versions of Lillian's story, each organized by theme and genre.</p>
+      <div class="universe-preview">
+        <p><strong>Available Universes:</strong> Primeverse, Dramaverse, Funverse, Historyverse, Horroverse, Kinkyverse, Techverse, Weirdverse</p>
+      </div>
       <p>
         <a href="hub2.html" class="main-link">Enter the Main Station &rarr;</a>
       </p>
@@ -45,5 +52,15 @@
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+  
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
 </body>
 </html>

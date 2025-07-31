@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Main Station - Gateway to all universes in the Lillianverse storytelling multiverse.">
+  <meta name="keywords" content="interactive fiction, multiverse, storytelling, Lillian, universes">
   <title>Main Station | Lillianverse</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
   <header>
     <img src="assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
   </header>
@@ -16,58 +20,51 @@
     <a href="hub2.html" class="active">Main Station</a>
   </nav>
   <main>
-    <h1>Main Station: The Heart of the Lillianverse</h1>
-    <p>Welcome to the Main Station! This is where the Lillianverse truly branches out into its many themed universes. Each universe contains multiple stories centered around a specific theme or genre.</p>
+    <h1>The Main Station</h1>
+    <p class="intro-text">Welcome to the heart of the Lillianverse! Each door leads to a different themed universe where Lillian lives countless different lives. Choose your destination:</p>
     
     <section class="hub-section">
-      <h2>Additional Individual Stories</h2>
-      <p>More standalone stories for your enjoyment:</p>
-      <ul>
-        <li><a href="stories/story6.html">Story 6 (placeholder)</a></li>
-        <li><a href="stories/story7.html">Story 7 (placeholder)</a></li>
-        <li><a href="stories/story8.html">Story 8 (placeholder)</a></li>
-        <li><a href="stories/story9.html">Story 9 (placeholder)</a></li>
-        <li><a href="stories/story10.html">Story 10 (placeholder)</a></li>
-      </ul>
-    </section>
-
-    <section class="hub-section">
-      <h2>Themed Universes</h2>
-      <p>Choose a universe to explore stories within that specific theme:</p>
+      <h2>Available Universes</h2>
       <div class="universe-grid">
         <div class="universe-item">
-          <h3><a href="Kinkyverse/index.html">Kinkyverse</a></h3>
-          <p>Stories exploring themes of romance and intimacy</p>
-        </div>
-        <div class="universe-item">
-          <h3><a href="Horrorverse/index.html">Horrorverse</a></h3>
-          <p>Spooky and supernatural tales</p>
-        </div>
-        <div class="universe-item">
-          <h3><a href="Techverse/index.html">Techverse</a></h3>
-          <p>Science fiction and technological adventures</p>
-        </div>
-        <div class="universe-item">
-          <h3><a href="Funverse/index.html">Funverse</a></h3>
-          <p>Light-hearted and humorous stories</p>
+          <h3><a href="Primeverse/index.html">Primeverse</a></h3>
+          <p>The original timeline - where it all begins. Follow Lillian's foundational story and discover the core of her character.</p>
         </div>
         <div class="universe-item">
           <h3><a href="Dramaverse/index.html">Dramaverse</a></h3>
-          <p>Emotional and dramatic narratives</p>
+          <p>Stories filled with emotional depth and complex relationships. Explore the human condition through Lillian's dramatic experiences.</p>
+        </div>
+        <div class="universe-item">
+          <h3><a href="Funverse/index.html">Funverse</a></h3>
+          <p>Light-hearted adventures and comedic tales. Join Lillian in her more whimsical and entertaining journeys.</p>
         </div>
         <div class="universe-item">
           <h3><a href="Historyverse/index.html">Historyverse</a></h3>
-          <p>Historical settings and period pieces</p>
+          <p>Lillian across different historical periods. Experience how she might have lived in various eras throughout time.</p>
+        </div>
+        <div class="universe-item">
+          <h3><a href="Horroverse/index.html">Horroverse</a></h3>
+          <p>Dark tales and supernatural encounters. Venture into the shadows with Lillian's more frightening adventures.</p>
+        </div>
+        <div class="universe-item">
+          <h3><a href="Kinkyverse/index.html">Kinkyverse</a></h3>
+          <p>Adult-oriented stories exploring mature themes. <em>(18+ content)</em></p>
+        </div>
+        <div class="universe-item">
+          <h3><a href="Techverse/index.html">Techverse</a></h3>
+          <p>Science fiction and futuristic scenarios. Discover Lillian's adventures in technological and sci-fi settings.</p>
         </div>
         <div class="universe-item">
           <h3><a href="Weirdverse/index.html">Weirdverse</a></h3>
-          <p>Bizarre and surreal experiences</p>
-        </div>
-        <div class="universe-item">
-          <h3><a href="Islingtonverse/index.html">Islingtonverse</a></h3>
-          <p>Stories set in the Islington area</p>
+          <p>Surreal and experimental narratives. Enter the strange and unconventional sides of Lillian's existence.</p>
         </div>
       </div>
+    </section>
+    
+    <section class="hub-section">
+      <h2>Navigation Tips</h2>
+      <p>Each universe contains multiple stories exploring different aspects of that theme. You can always return here using the navigation menu, or explore the connections between universes as they develop.</p>
+      <p><strong>New to the Lillianverse?</strong> Start with the <a href="Primeverse/index.html">Primeverse</a> to understand Lillian's core character, then branch out to whichever themes interest you most.</p>
     </section>
   </main>
   <footer>
@@ -76,5 +73,15 @@
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+  
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
 </body>
 </html>

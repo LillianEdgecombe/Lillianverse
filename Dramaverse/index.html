@@ -2,20 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kinkyverse | Lillianverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dramaverse - Emotional stories and complex relationships in the Lillianverse.">
+  <title>Dramaverse | Lillianverse</title>
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
+  <header>
+    <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+  </header>
   <nav>
     <a href="../index.html">Home</a>
-    <a href="../project.html">About</a>
+    <a href="../about.html">About</a>
     <a href="../hub1.html">First Hub</a>
     <a href="../hub2.html">Main Station</a>
-    <a href="index.html" class="active">Kinkyverse</a>
+    <a href="index.html" class="active">Dramaverse</a>
   </nav>
   <main>
-    <h1>Kinkyverse</h1>
-    <p>Stories in this verse will appear here (add links to markdown files as you create them).</p>
+    <h1>Welcome to the Dramaverse</h1>
+    <p class="intro-text">In this universe, Lillian's stories are filled with emotional depth, complex relationships, and the raw human experience across different lives and circumstances.</p>
+    
+    <section class="hub-section">
+      <h2>Available Stories</h2>
+      <p><em>Stories are being added regularly. Check back soon for new emotional journeys in the Dramaverse!</em></p>
+      <!-- Future story links will go here -->
+      <div class="universe-grid">
+        <div class="universe-item">
+          <h3>Coming Soon</h3>
+          <p>Deep emotional narratives exploring love, loss, and the complexity of human relationships.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="hub-section">
+      <h2>About This Universe</h2>
+      <p>The Dramaverse explores the deeper emotional landscapes of Lillian's many lives. Here you'll find stories that delve into love, loss, triumph, and the complex web of human relationships that shape who we become.</p>
+      <p>These stories focus on character development, emotional growth, and the profound moments that define us. Whether it's a tale of forbidden love, family drama, or personal transformation, each story in the Dramaverse aims to touch the heart and soul.</p>
+    </section>
+    
+    <section class="hub-section">
+      <h2>Navigation</h2>
+      <p><a href="../hub2.html" class="main-link">&larr; Return to Main Station</a></p>
+    </section>
   </main>
   <footer>
     <a href="#" id="discord-link">Discord</a>
@@ -23,5 +52,15 @@
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+  
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
 </body>
 </html>

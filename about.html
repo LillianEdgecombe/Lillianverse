@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About the Lillianverse - Learn about this multimedia storytelling universe and its creator.">
   <title>About | Lillianverse</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
   <header>
     <img src="assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
   </header>
@@ -13,21 +16,30 @@
     <a href="index.html">Home</a>
     <a href="about.html" class="active">About</a>
     <a href="hub1.html">First Hub</a>
+    <a href="hub2.html">Main Station</a>
   </nav>
   <main>
     <h1>About the Lillianverse</h1>
     <section class="blurb">
-      <p>Have you ever tried to imagine how would your life have been if you took a different choice? And what if you lived in another time? Or were a different person entirely? If you said 'yes' to at least one of those questions, enter the Lillianverse!</p>
-      <p>In the Lillianverse, each story tells a different version of the same character, Lillian, each time with a different twist: a different occupation, a different life history, a different epoch, a different sex or even species. All stories are organized by theme.</p>
-      <p>Have fun and enjoy the differences!</p>
+      <p>Have you ever tried to imagine how your life would have been if you took a different choice? What if you lived in another time? Or were a different person entirely? If you said 'yes' to at least one of those questions, enter the Lillianverse!</p>
+      <p>In the Lillianverse, each story tells a different version of the same character, Lillian, each time with a different twist: a different occupation, a different life history, a different epoch, a different gender or even species. All stories are organized by theme to help you find exactly the kind of adventure you're looking for.</p>
+      <p>Have fun and enjoy exploring the infinite possibilities!</p>
     </section>
+    
     <section class="prologue">
-      <h2>Prologue</h2>
-       <div class="markdown" id="prologue-container">
-        Loading prologue...
-       </div>
+      <h2>Prologue: The Accident</h2>
+      <div class="markdown" id="prologue-container">
+        <p><em>Loading the story that started it all...</em></p>
+      </div>
     </section>
-    <p>
+    
+    <section class="hub-section">
+      <h2>About the Creator</h2>
+      <p>The Lillianverse is a passion project exploring the infinite possibilities of storytelling through the lens of a single character experiencing countless different lives. Each universe represents a different genre, theme, or approach to narrative, allowing for both familiar and experimental storytelling.</p>
+      <p>This project celebrates the idea that every choice we make creates a new reality, and every story we tell opens a door to understanding ourselves and others in new ways.</p>
+    </section>
+    
+    <p style="text-align: center; margin-top: 2em;">
       <a href="hub1.html" class="main-link">Begin Your Journey &rarr;</a>
     </p>
   </main>
@@ -38,17 +50,31 @@
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
 
-<script>
-fetch('assets/prologue.md')
-  .then(response => response.text())
-  .then(text => {
-    document.getElementById('prologue-container').innerHTML = marked.parse(text);
-  })
-  .catch(err => {
-    document.getElementById('prologue-container').textContent = 'Could not load prologue.';
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-   <script src="/assets/subway-nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+    
+    // Load prologue
+    fetch('assets/prologue.md')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(text => {
+        document.getElementById('prologue-container').innerHTML = marked.parse(text);
+      })
+      .catch(err => {
+        console.error('Error loading prologue:', err);
+        document.getElementById('prologue-container').innerHTML = '<p><em>The prologue will be available soon. In the meantime, begin your journey through the universes!</em></p>';
+      });
+  </script>
 </body>
-</html> 
+</html>
