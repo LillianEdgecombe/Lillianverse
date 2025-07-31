@@ -67,7 +67,7 @@ footer a {
   white-space: pre-wrap;
 }
 
-subway-nav {
+#subway-nav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -77,17 +77,129 @@ subway-nav {
   box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
   padding-bottom: 8px;
 }
-subway-nav svg {
+#subway-nav svg {
   display: block;
   margin: 0 auto;
 }
-subway-nav circle {
+#subway-nav circle {
+  fill: #ccc;
+  stroke: #444;
+  stroke-width: 3;
+  transition: fill 0.2s;
   cursor: pointer;
-  transition: filter 0.2s;
 }
-subway-nav circle:hover {
-  filter: brightness(1.2);
+#subway-nav circle.active {
+  fill: #2196f3;
+  stroke: #1976d2;
 }
-subway-nav .station-labels span {
-  font-weight: bold;
+#subway-nav .station-labels {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px;
+  font-size: 0.9em;
+  color: #333;
+}
+#subway-nav .station-labels span {
+  width: 80px;
+  text-align: center;
+}
+
+/* Navigation options styling */
+.navigation-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.nav-option {
+  background: #f8f6f2;
+  padding: 2em;
+  border-radius: 8px;
+  border: 2px solid #e6ded8;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.nav-option:hover {
+  border-color: #b57e5e;
+  box-shadow: 0 4px 12px rgba(181, 126, 94, 0.2);
+}
+
+.nav-option h2 {
+  color: #b57e5e;
+  margin-bottom: 0.5em;
+}
+
+.nav-option p {
+  margin-bottom: 1.5em;
+  color: #666;
+}
+
+/* Hub section styling */
+.hub-section {
+  margin-bottom: 3em;
+  padding: 1.5em;
+  background: #f8f6f2;
+  border-radius: 8px;
+  border-left: 4px solid #b57e5e;
+}
+
+.hub-section h2 {
+  color: #b57e5e;
+  margin-top: 0;
+}
+
+/* Universe grid styling */
+.universe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5em;
+  margin-top: 1em;
+}
+
+.universe-item {
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 8px;
+  border: 2px solid #e6ded8;
+  transition: all 0.3s ease;
+}
+
+.universe-item:hover {
+  border-color: #b57e5e;
+  box-shadow: 0 4px 12px rgba(181, 126, 94, 0.2);
+  transform: translateY(-2px);
+}
+
+.universe-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.universe-item h3 a {
+  color: #b57e5e;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.universe-item h3 a:hover {
+  text-decoration: underline;
+}
+
+.universe-item p {
+  color: #666;
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navigation-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .universe-grid {
+    grid-template-columns: 1fr;
+  }
 }
