@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Character Artwork | Kinkyverse | Lillianverse</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .artwork-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .back-link {
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+    .character-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .character-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .character-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .character-info {
+      padding: 1rem;
+    }
+    .character-name {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .character-description {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../project.html">About</a>
+    <a href="../hub1.html">First Hub</a>
+    <a href="../hub2.html">Main Station</a>
+    <a href="index.html">Kinkyverse</a>
+  </nav>
+  <main>
+    <div class="artwork-container">
+      <a href="index.html" class="back-link">← Back to Stories</a>
+      <h1>Character Artwork</h1>
+      
+      <div class="character-gallery">
+        <div class="character-card">
+          <img src="portraits/lillian.png" alt="Lillian Edgecombe" class="character-image">
+          <div class="character-info">
+            <h2 class="character-name">Lillian Edgecombe</h2>
+            <p class="character-description">An anthropomorphic European Badger in her early forties. A talented musician and ceramicist, Lillian is known for her strong presence, deliberate movements, and protective nature. She and her husband Miles have adopted Sarah, creating a loving found family.</p>
+          </div>
+        </div>
+        
+        <div class="character-card">
+          <img src="portraits/miles.png" alt="Miles Ferguson" class="character-image">
+          <div class="character-info">
+            <h2 class="character-name">Miles Ferguson</h2>
+            <p class="character-description">An anthropomorphic German Shepherd in his early forties. Miles works as a grocery store manager and is characterized by his loyalty, methodical approach to problems, and quiet strength. His relationship with Lillian forms the emotional core of their household.</p>
+          </div>
+        </div>
+        
+        <div class="character-card">
+          <img src="portraits/sarah.png" alt="Sarah" class="character-image">
+          <div class="character-info">
+            <h2 class="character-name">Sarah</h2>
+            <p class="character-description">The adopted daughter of Lillian and Miles, Sarah is a talented artist in her late twenties. She struggles with her lack of childhood memories but finds her voice through art, creating powerful works that explore themes of identity, memory, and belonging.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <a href="#" id="discord-link">Discord</a>
+    <a href="#" id="kofi-link">Ko-fi</a>
+    <a href="#" id="redbubble-link">RedBubble</a>
+    <a href="#" id="amazon-link">Amazon KDP</a>
+  </footer>
+</body>
+</html>

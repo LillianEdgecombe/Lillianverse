@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Girl with No Childhood | Kinkyverse | Lillianverse</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .story-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .back-link {
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../project.html">About</a>
+    <a href="../hub1.html">First Hub</a>
+    <a href="../hub2.html">Main Station</a>
+    <a href="index.html">Kinkyverse</a>
+  </nav>
+  <main>
+    <div class="story-container">
+      <a href="index.html" class="back-link">← Back to Stories</a>
+      <div id="story-content"></div>
+    </div>
+  </main>
+  <footer>
+    <a href="#" id="discord-link">Discord</a>
+    <a href="#" id="kofi-link">Ko-fi</a>
+    <a href="#" id="redbubble-link">RedBubble</a>
+    <a href="#" id="amazon-link">Amazon KDP</a>
+  </footer>
+  
+  <script>
+    fetch('the_girl_with_no_childhood.md')
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById('story-content').innerHTML = marked.parse(text);
+      });
+  </script>
+</body>
+</html>
