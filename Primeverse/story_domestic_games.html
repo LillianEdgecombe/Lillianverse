@@ -2,33 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Domestic Games | Kinkyverse | Lillianverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domestic Games | Primeverse | Lillianverse</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/story.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    .story-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    .back-link {
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-  </style>
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
   <nav>
     <a href="../index.html">Home</a>
-    <a href="../project.html">About</a>
+    <a href="../about.html">About</a>
     <a href="../hub1.html">First Hub</a>
     <a href="../hub2.html">Main Station</a>
-    <a href="index.html">Kinkyverse</a>
+    <a href="index.html">Primeverse</a>
   </nav>
   <main>
     <div class="story-container">
-      <a href="index.html" class="back-link">← Back to Stories</a>
+      <a href="index.html" class="back-link">&larr; Back to Primeverse Stories</a>
       <div id="story-content"></div>
     </div>
   </main>
@@ -40,6 +31,15 @@
   </footer>
   
   <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+
+    // Load story content
     fetch('domestic_games.md')
       .then(response => response.text())
       .then(text => {
