@@ -2,36 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Portrait of the Artist | Kinkyverse | Lillianverse</title>
+  <title>Portrait of the Artist | Primeverse | Lillianverse</title>
   <link rel="stylesheet" href="../assets/style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    .story-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    .back-link {
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-  </style>
 </head>
 <body>
+  <div class="reading-progress"></div>
+
+  <header>
+    <a href="../index.html">
+      <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+    </a>
+  </header>
+
   <nav>
     <a href="../index.html">Home</a>
-    <a href="../project.html">About</a>
-    <a href="../hub1.html">First Hub</a>
-    <a href="../hub2.html">Main Station</a>
-    <a href="index.html">Kinkyverse</a>
+    <a href="../about.html">About</a>
+    <a href="../hub1.html">Hub 1</a>
+    <a href="../hub2.html">Hub 2</a>
+    <a href="index.html" class="active">Primeverse</a>
   </nav>
+
   <main>
     <div class="story-container">
-      <a href="index.html" class="back-link">← Back to Stories</a>
-      <div id="story-content"></div>
+      <a href="index.html" class="back-link">&larr; Back to Primeverse Stories</a>
+      <div id="story-content" class="markdown"></div>
     </div>
   </main>
+
   <footer>
     <a href="#" id="discord-link">Discord</a>
     <a href="#" id="kofi-link">Ko-fi</a>
@@ -40,6 +38,17 @@
   </footer>
   
   <script>
+    // Reading progress bar
+    const readingProgress = document.querySelector('.reading-progress');
+    function updateProgressBar() {
+      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPosition = window.scrollY;
+      const progress = (scrollPosition / scrollTotal) * 100;
+      readingProgress.style.width = `${progress}%`;
+    }
+    window.addEventListener('scroll', updateProgressBar);
+
+    // Load story content
     fetch('portrait_of_the_artist.md')
       .then(response => response.text())
       .then(text => {

@@ -4,55 +4,27 @@
   <meta charset="UTF-8">
   <title>Character Artwork | Primeverse | Lillianverse</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <style>
-    .artwork-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .back-link {
-      margin-bottom: 2rem;
-      display: inline-block;
-    }
-    .character-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .character-card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .character-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .character-info {
-      padding: 1rem;
-    }
-    .character-name {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-    .character-description {
-      margin-bottom: 0;
-    }
-  </style>
 </head>
 <body>
+  <div class="reading-progress"></div>
+
+  <header>
+    <a href="../index.html">
+      <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+    </a>
+  </header>
+
   <nav>
     <a href="../index.html">Home</a>
-    <a href="../project.html">About</a>
-    <a href="../hub1.html">First Hub</a>
-    <a href="../hub2.html">Main Station</a>
-    <a href="index.html">Primeverse</a>
+    <a href="../about.html">About</a>
+    <a href="../hub1.html">Hub 1</a>
+    <a href="../hub2.html">Hub 2</a>
+    <a href="index.html" class="active">Primeverse</a>
   </nav>
+
   <main>
     <div class="artwork-container">
-      <a href="index.html" class="back-link">← Back to Stories</a>
+      <a href="index.html" class="back-link">← Back to Primeverse Stories</a>
       <h1>Character Artwork</h1>
       
       <div class="character-gallery">
@@ -82,11 +54,25 @@
       </div>
     </div>
   </main>
+
   <footer>
     <a href="#" id="discord-link">Discord</a>
     <a href="#" id="kofi-link">Ko-fi</a>
     <a href="#" id="redbubble-link">RedBubble</a>
     <a href="#" id="amazon-link">Amazon KDP</a>
   </footer>
+
+  <script>
+    // Reading progress bar
+    const readingProgress = document.querySelector('.reading-progress');
+    function updateProgressBar() {
+      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPosition = window.scrollY;
+      const progress = (scrollPosition / scrollTotal) * 100;
+      readingProgress.style.width = `${progress}%`;
+    }
+    window.addEventListener('scroll', updateProgressBar);
+  </script>
+
 </body>
 </html>

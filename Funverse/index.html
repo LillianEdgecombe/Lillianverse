@@ -4,21 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Funverse - Light-hearted adventures and comedic tales in the Lillianverse.">
-  <title>Funverse | Lillianverse</title>
+  <title>The Funverse</title>
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-  <div class="reading-progress" id="reading-progress"></div>
+  <div class="progress-bar-container">
+    <div class="progress-bar"></div>
+  </div>
+
   <header>
-    <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+    <a href="../index.html">
+      <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image">
+    </a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+    </nav>
   </header>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../about.html">About</a>
-    <a href="../hub1.html">First Hub</a>
-    <a href="../hub2.html">Main Station</a>
-    <a href="index.html" class="active">Funverse</a>
-  </nav>
+
   <main>
     <h1>Welcome to the Funverse</h1>
     <p class="intro-text">In this universe, Lillian's stories are light-hearted, comedic, and full of whimsical adventures. Join her on her most entertaining journeys!</p>
@@ -45,13 +48,11 @@
       <p><a href="../hub2.html" class="main-link">&larr; Return to Main Station</a></p>
     </section>
   </main>
+
   <footer>
-    <a href="#" id="discord-link">Discord</a>
-    <a href="#" id="kofi-link">Ko-fi</a>
-    <a href="#" id="redbubble-link">RedBubble</a>
-    <a href="#" id="amazon-link">Amazon KDP</a>
+    <p>&copy; 2024 Lillian Verses. All rights reserved.</p>
   </footer>
-  
+
   <script>
     // Reading progress bar
     window.addEventListener('scroll', () => {

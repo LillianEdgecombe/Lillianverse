@@ -1,103 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Primeverse | Lillianverse</title>
-  <link rel="stylesheet" href="../assets/style.css">
-  <style>
-    .universe-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .universe-item {
-      padding: 0;
-      background: none;
-      border: none;
-      box-shadow: none;
-    }
-    .universe-item h3 {
-      margin: 0 0 0.3em 0;
-      font-size: 1.25em;
-      font-weight: bold;
-    }
-    .universe-item h3 a {
-      display: inline-block;
-      text-decoration: none;
-      background: #321b4b;
-      color: #fff;
-      padding: 0.55em 1.3em;
-      border-radius: 1.3em;
-      font-size: 1.22em;
-      font-weight: bold;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 8px rgba(50,27,75,0.08);
-      letter-spacing: 0.02em;
-      text-align: left;
-    }
-    .universe-item h3 a:hover,
-    .universe-item h3 a:focus {
-      background: #553080;
-      color: #ffd86b;
-    }
-    .story-summary {
-      margin-top: 0.3em;
-      margin-bottom: 0.7em;
-      padding-left: 1.1em;
-      font-size: 1em;
-      color: #473a64;
-    }
-    @media (max-width: 600px) {
-      .universe-item h3 a {
-        font-size: 1em;
-        padding: 0.7em 0.7em;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Primeverse</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../about.html">About</a>
-    <a href="../hub1.html">First Hub</a>
-    <a href="../hub2.html">Main Station</a>
-    <a href="index.html" class="active">Primeverse</a>
-  </nav>
-  <main>
-    <h1>Primeverse</h1>
-    <div class="universe-grid">
-      <div class="universe-item">
-        <h3><a href="story_domestic_games.html">Domestic Games</a></h3>
-        <p class="story-summary">A seasonal exploration of the intimate relationship between Lillian Edgecombe and Miles Ferguson, showcasing their deep connection through everyday rituals and private moments that celebrate their unique anthro identities.</p>
-      </div>
-      <div class="universe-item">
-        <h3><a href="story_house_rules.html">House Rules</a></h3>
-        <p class="story-summary">An evening at home with Lillian, Miles, and their adopted daughter Sarah reveals the subtle dynamics of their family life, exploring themes of belonging, adaptation, and the unspoken rules that bind them together.</p>
-      </div>
-      <div class="universe-item">
-        <h3><a href="story_miles_to_go.html">Miles to Go</a></h3>
-        <p class="story-summary">Follow Miles Ferguson through his day as a grocery store manager, navigating workplace challenges, casual speciesism, and a potential promotion, while finding strength in his relationship with Lillian.</p>
-      </div>
-      <div class="universe-item">
-        <h3><a href="story_portrait_of_the_artist.html">Portrait of the Artist as Someone's Daughter</a></h3>
-        <p class="story-summary">Sarah struggles with her professor's critique about lacking personal narrative due to her forgotten childhood, finding inspiration through a conversation with Lillian that leads to an art installation about "Imagined Childhoods."</p>
-      </div>
-      <div class="universe-item">
-        <h3><a href="story_the_girl_with_no_childhood.html">The Girl with No Childhood</a></h3>
-        <p class="story-summary">An exploration of Sarah's journey to becoming an artist while reconciling with her lack of childhood memories, learning to accept love and create meaning through her sculpture series "Imagined Childhoods."</p>
-      </div>
-      <div class="universe-item">
-        <h3><a href="artwork.html">Character Artwork</a></h3>
-        <p class="story-summary">View portraits of the main characters from the Primeverse stories.</p>
-      </div>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar"></div>
     </div>
-  </main>
-  <footer>
-    <a href="#" id="discord-link">Discord</a>
-    <a href="#" id="kofi-link">Ko-fi</a>
-    <a href="#" id="redbubble-link">RedBubble</a>
-    <a href="#" id="amazon-link">Amazon KDP</a>
-  </footer>
+
+    <header>
+        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image">
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../hub1.html">Hub 1</a>
+            <a href="../hub2.html">Hub 2</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <div class="nav-options">
+                <a href="../Dramaverse/index.html" class="nav-option">The Dramaverse</a>
+                <a href="../Funverse/index.html" class="nav-option">The Funverse</a>
+                <a href="../Historyverse/index.html" class="nav-option">The Historyverse</a>
+                <a href="../Horroverse/index.html" class="nav-option">The Horroverse</a>
+                <a href="../Kinkyverse/index.html" class="nav-option">The Kinkyverse</a>
+                <a href="../Primeverse/index.html" class="nav-option">The Primeverse</a>
+                <a href="../Techverse/index.html" class="nav-option">The Techverse</a>
+                <a href="../Weirdverse/index.html" class="nav-option">The Weirdverse</a>
+            </div>
+        </div>
+
+        <section id="stories" class="story-section">
+            <h2>Available Stories</h2>
+            <div class="universe-grid">
+                <div class="universe-item story-card">
+                    <h3><a href="story_domestic_games.html">Domestic Games</a></h3>
+                    <p>A seasonal exploration of the intimate relationship between Lillian Edgecombe and Miles Ferguson, showcasing their deep connection through everyday rituals and private moments that celebrate their unique anthro identities.</p>
+                </div>
+                <div class="universe-item story-card">
+                    <h3><a href="story_house_rules.html">House Rules</a></h3>
+                    <p>An evening at home with Lillian, Miles, and their adopted daughter Sarah reveals the subtle dynamics of their family life, exploring themes of belonging, adaptation, and the unspoken rules that bind them together.</p>
+                </div>
+                <div class="universe-item story-card">
+                    <h3><a href="story_miles_to_go.html">Miles to Go</a></h3>
+                    <p>Follow Miles Ferguson through his day as a grocery store manager, navigating workplace challenges, casual speciesism, and a potential promotion, while finding strength in his relationship with Lillian.</p>
+                </div>
+                <div class="universe-item story-card">
+                    <h3><a href="story_portrait_of_the_artist.html">Portrait of the Artist as Someone's Daughter</a></h3>
+                    <p>Sarah struggles with her professor's critique about lacking personal narrative due to her forgotten childhood, finding inspiration through a conversation with Lillian that leads to an art installation about "Imagined Childhoods."</p>
+                </div>
+                <div class="universe-item story-card">
+                    <h3><a href="story_the_girl_with_no_childhood.html">The Girl with No Childhood</a></h3>
+                    <p>An exploration of Sarah's journey to becoming an artist while reconciling with her lack of childhood memories, learning to accept love and create meaning through her sculpture series "Imagined Childhoods."</p>
+                </div>
+                <div class="universe-item story-card">
+                    <h3><a href="artwork.html">Character Artwork</a></h3>
+                    <p>View portraits of the main characters from the Primeverse stories.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-universe" class="about-section">
+            <h2>About This Universe</h2>
+            <p>Welcome to the Primeverse, the central reality where Lillian's primary story unfolds. This universe explores themes of identity, family, and belonging through the lives of Lillian, Miles, and Sarah.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Lillianverse. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + "%";
+        });
+    </script>
+
 </body>
 </html>
