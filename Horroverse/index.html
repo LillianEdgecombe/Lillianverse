@@ -8,57 +8,53 @@
 </head>
 <body>
 
-    <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-    </div>
+    <div class="reading-progress" id="reading-progress"></div>
 
     <header>
-        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="../about.html">About</a>
-            <a href="../hub1.html">Hub 1</a>
-            <a href="../hub2.html">Hub 2</a>
-        </nav>
+        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
     </header>
 
-    <main>
-        <div class="main-content">
-            <div class="nav-options">
-                <a href="../Dramaverse/index.html" class="nav-option">The Dramaverse</a>
-                <a href="../Funverse/index.html" class="nav-option">The Funverse</a>
-                <a href="../Historyverse/index.html" class="nav-option">The Historyverse</a>
-                <a href="../Horroverse/index.html" class="nav-option">The Horroverse</a>
-                <a href="../Kinkyverse/index.html" class="nav-option">The Kinkyverse</a>
-                <a href="../Primeverse/index.html" class="nav-option">The Primeverse</a>
-                <a href="../Techverse/index.html" class="nav-option">The Techverse</a>
-                <a href="../Weirdverse/index.html" class="nav-option">The Weirdverse</a>
-            </div>
-        </div>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../hub1.html">First Hub</a>
+        <a href="../hub2.html">Main Station</a>
+    </nav>
 
-        <section id="stories" class="story-section">
+    <main>
+        <h1>Welcome to the Horroverse</h1>
+        <p class="intro-text">Dark tales and supernatural encounters. Venture into the shadows with Lillian's more frightening adventures.</p>
+
+        <section id="stories" class="hub-section">
             <h2>Available Stories</h2>
             <div class="universe-grid">
-                <!-- Story cards will be added here -->
+                <div class="universe-item">
+                    <h3>Coming Soon</h3>
+                    <p>Terrifying tales and supernatural encounters are on the way.</p>
+                </div>
             </div>
         </section>
 
-        <section id="about-universe" class="about-section">
+        <section id="about-universe" class="hub-section">
             <h2>About This Universe</h2>
-            <p>Welcome to the Horroverse. Details about this universe will be provided here soon.</p>
+            <p>The Horroverse delves into the darker side of the multiverse. These stories feature psychological horror, supernatural threats, and suspenseful narratives designed to send a chill down your spine.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Lillianverse. All rights reserved.</p>
+        <a href="#" id="discord-link">Discord</a>
+        <a href="#" id="kofi-link">Ko-fi</a>
+        <a href="#" id="redbubble-link">RedBubble</a>
+        <a href="#" id="amazon-link">Amazon KDP</a>
     </footer>
 
     <script>
-        window.addEventListener('scroll', function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.querySelector('.progress-bar').style.width = scrolled + "%";
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          document.getElementById('reading-progress').style.width = scrolled + '%';
         });
     </script>
 

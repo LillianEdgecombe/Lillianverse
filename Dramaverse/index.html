@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dramaverse - Emotional stories and complex relationships in the Lillianverse.">
-    <title>The Dramaverse</title>
+    <title>Lillianverse - Dramaverse</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -14,58 +13,46 @@
     </div>
 
     <header>
-        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="../about.html">About</a>
-            <a href="../hub1.html">Hub 1</a>
-            <a href="../hub2.html">Hub 2</a>
-        </nav>
+        <a href="../hub2.html"><img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image"></a>
+        <h1>Dramaverse</h1>
     </header>
 
-    <main>
-        <div class="main-content">
-            <div class="nav-options">
-                <a href="../Dramaverse/index.html" class="nav-option">The Dramaverse</a>
-                <a href="../Funverse/index.html" class="nav-option">The Funverse</a>
-                <a href="../Historyverse/index.html" class="nav-option">The Historyverse</a>
-                <a href="../Horroverse/index.html" class="nav-option">The Horroverse</a>
-                <a href="../Kinkyverse/index.html" class="nav-option">The Kinkyverse</a>
-                <a href="../Primeverse/index.html" class="nav-option">The Primeverse</a>
-                <a href="../Techverse/index.html" class="nav-option">The Techverse</a>
-                <a href="../Weirdverse/index.html" class="nav-option">The Weirdverse</a>
-            </div>
-        </div>
+    <nav>
+        <ul>
+            <li><a href="../hub2.html">Home</a></li>
+            <li><a href="../Primeverse/index.html">Primeverse</a></li>
+            <li><a href="../Weirdverse/index.html">Weirdverse</a></li>
+            <li><a href="../Historyverse/index.html">Historyverse</a></li>
+            <li><a href="../Horroverse/index.html">Horrorverse</a></li>
+            <li><a href="../Kinkyverse/index.html">Kinkyverse</a></li>
+            <li><a href="../Funverse/index.html">Funverse</a></li>
+            <li><a href="../Dramaverse/index.html">Dramaverse</a></li>
+            <li><a href="../Techverse/index.html">Techverse</a></li>
+            <li><a href="../Islingtonverse/index.html">Islingtonverse</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </nav>
 
-        <section id="stories" class="story-section">
+    <main>
+        <section>
             <h2>Available Stories</h2>
             <div class="universe-grid">
-                <div class="universe-item">
-                  <h3>Coming Soon</h3>
-                  <p>Deep emotional narratives exploring love, loss, and the complexity of human relationships.</p>
-                </div>
+                <!-- Story previews will be added here -->
+                <p>Coming Soon!</p>
             </div>
         </section>
 
-        <section id="about-universe" class="about-section">
+        <section>
             <h2>About This Universe</h2>
-            <p>In this universe, Lillian's stories are filled with emotional depth, complex relationships, and the raw human experience across different lives and circumstances. The Dramaverse explores the deeper emotional landscapes of Lillian's many lives. Here you'll find stories that delve into love, loss, triumph, and the complex web of human relationships that shape who we become.</p>
-            <p>These stories focus on character development, emotional growth, and the profound moments that define us. Whether it's a tale of forbidden love, family drama, or personal transformation, each story in the Dramaverse aims to touch the heart and soul.</p>
+            <p>Welcome to the Dramaverse. These are stories about people and their problems.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Lillianverse. All rights reserved.</p>
+        <p>&copy; 2024 Lillian. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Reading progress bar
-        window.addEventListener('scroll', function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.querySelector('.progress-bar').style.width = scrolled + "%";
-        });
-    </script>
+    <script src="../assets/subway-nav.js"></script>
+
 </body>
 </html>
