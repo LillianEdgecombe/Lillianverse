@@ -3,56 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lillianverse - Historyverse</title>
+    <title>The Historyverse</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-    <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-    </div>
+    <div class="reading-progress" id="reading-progress"></div>
 
     <header>
-        <a href="../hub2.html"><img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image"></a>
-        <h1>Historyverse</h1>
+        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
     </header>
 
     <nav>
-        <ul>
-            <li><a href="../hub2.html">Home</a></li>
-            <li><a href="../Primeverse/index.html">Primeverse</a></li>
-            <li><a href="../Weirdverse/index.html">Weirdverse</a></li>
-            <li><a href="../Historyverse/index.html">Historyverse</a></li>
-            <li><a href="../Horroverse/index.html">Horrorverse</a></li>
-            <li><a href="../Kinkyverse/index.html">Kinkyverse</a></li>
-            <li><a href="../Funverse/index.html">Funverse</a></li>
-            <li><a href="../Dramaverse/index.html">Dramaverse</a></li>
-            <li><a href="../Techverse/index.html">Techverse</a></li>
-            <li><a href="../Islingtonverse/index.html">Islingtonverse</a></li>
-            <li><a href="../about.html">About</a></li>
-        </ul>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../hub1.html">First Hub</a>
+        <a href="../hub2.html">Main Station</a>
     </nav>
 
     <main>
-        <section>
+        <h1>Welcome to the Historyverse</h1>
+        <p class="intro-text">These are stories about what was, and what could have been.</p>
+
+        <section id="stories" class="hub-section">
             <h2>Available Stories</h2>
             <div class="universe-grid">
-                <!-- Story previews will be added here -->
                 <p>Coming Soon!</p>
             </div>
         </section>
 
-        <section>
+        <section id="about-universe" class="hub-section">
             <h2>About This Universe</h2>
             <p>Welcome to the Historyverse. These are stories about what was, and what could have been.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Lillian. All rights reserved.</p>
+        <a href="#" id="discord-link">Discord</a>
+        <a href="#" id="kofi-link">Ko-fi</a>
+        <a href="#" id="redbubble-link">RedBubble</a>
+        <a href="#" id="amazon-link">Amazon KDP</a>
     </footer>
 
-    <script src="../assets/subway-nav.js"></script>
+    <script>
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+    </script>
 
 </body>
 </html>
