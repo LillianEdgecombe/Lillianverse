@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Latest news and updates for the Lillianverse project.">
+  <title>News | Lillianverse</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="reading-progress" id="reading-progress"></div>
+  <header>
+    <img src="assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="hub1.html">First Hub</a>
+    <a href="hub2.html">Main Station</a>
+    <a href="Detectiveverse/index.html">Detectiveverse</a>
+    <a href="contacts.html">Contact</a>
+    <a href="news.html" class="active">News</a>
+  </nav>
+  <main>
+    <h1>News and Updates</h1>
+    <p class="intro-text">Stay up-to-date with the latest developments in the Lillianverse. Here you'll find announcements, new story releases, and more.</p>
+    
+    <section class="hub-section">
+      <h2>Recent Announcements</h2>
+      <article>
+        <h3>New verse added!</h3>
+        <p><em>Posted on: 2024-07-22</em></p>
+        <p>We are excited to announce the addition of a new verse to the Lillianverse! Explore the mysteries and intrigues of the Detectiveverse, where Lillian takes on the role of a private investigator in a noir-inspired world.</p>
+      </article>
+      <article>
+        <h3>Website Launch</h3>
+        <p><em>Posted on: 2024-07-20</em></p>
+        <p>Welcome to the official website of the Lillianverse! We are thrilled to have you here. Explore the different universes, read the stories, and immerse yourself in the world of Lillian. We have many more stories and features planned, so be sure to check back often for updates.</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <a href="https://discord.gg/5HJWMv7m" id="discord-link">Discord</a>
+    <a href="#" id="kofi-link">Ko-fi</a>
+    <a href="#" id="redbubble-link">RedBubble</a>
+    <a href="#" id="amazon-link">Amazon KDP</a>
+  </footer>
+  
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

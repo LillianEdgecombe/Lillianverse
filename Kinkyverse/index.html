@@ -11,52 +11,60 @@
     <div class="reading-progress" id="reading-progress"></div>
 
     <header>
-        <img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-img">
+        <a href="../hub2.html"><img src="../assets/lillianverse-header.jpg" alt="Lillianverse Header" class="header-image"></a>
+        <h1>Kinkyverse</h1>
     </header>
 
     <nav>
-        <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="../hub1.html">First Hub</a>
-        <a href="../hub2.html">Main Station</a>
+        <ul>
+            <li><a href="../hub2.html">Home</a></li>
+            <li><a href="../news.html">News</a></li>
+            <li><a href="../contacts.html">Contact</a></li>
+            <li><a href="../Primeverse/index.html">Primeverse</a></li>
+            <li><a href="../Weirdverse/index.html">Weirdverse</a></li>
+            <li><a href="../Historyverse/index.html">Historyverse</a></li>
+            <li><a href="../Horroverse/index.html">Horrorverse</a></li>
+            <li><a href="../Kinkyverse/index.html">Kinkyverse</a></li>
+            <li><a href="../Funverse/index.html">Funverse</a></li>
+            <li><a href="../Dramaverse/index.html">Dramaverse</a></li>
+            <li><a href="../Techverse/index.html">Techverse</a></li>
+            <li><a href="../Islingtonverse/index.html">Islingtonverse</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
     </nav>
 
     <main>
-        <h1>Welcome to the Kinkyverse</h1>
-        <p class="intro-text">Adult-oriented stories exploring mature themes. <em>(18+ content)</em></p>
-
-        <section id="stories" class="hub-section">
+        <section>
             <h2>Available Stories</h2>
             <div class="universe-grid">
-                <div class="universe-item">
-                    <h3>Coming Soon</h3>
-                    <p>Mature stories are on the way.</p>
-                </div>
+                <a href="story_placeholder.html" class="story-preview">
+                    <img src="../assets/placeholders/kinky.jpg" alt="Placeholder">
+                    <div class="story-title">Placeholder</div>
+                </a>
             </div>
         </section>
 
-        <section id="about-universe" class="hub-section">
+        <section>
+            <h2>Artwork</h2>
+            <div class="universe-grid">
+                <a href="artwork.html" class="story-preview">
+                    <img src="../assets/placeholders/artwork.jpg" alt="Artwork">
+                    <div class="story-title">Character Artwork</div>
+                </a>
+            </div>
+        </section>
+
+        <section>
             <h2>About This Universe</h2>
             <p>The Kinkyverse contains adult-oriented stories that explore mature themes, relationships, and sexuality. This section is intended for readers aged 18 and over.</p>
         </section>
     </main>
 
     <footer>
-        <a href="#" id="discord-link">Discord</a>
-        <a href="#" id="kofi-link">Ko-fi</a>
-        <a href="#" id="redbubble-link">RedBubble</a>
-        <a href="#" id="amazon-link">Amazon KDP</a>
+        <p>&copy; 2024 Lillian. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Reading progress bar
-        window.addEventListener('scroll', () => {
-          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = (winScroll / height) * 100;
-          document.getElementById('reading-progress').style.width = scrolled + '%';
-        });
-    </script>
+    <script src="../assets/subway-nav.js"></script>
 
 </body>
 </html>
