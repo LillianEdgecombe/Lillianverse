@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lillianverse — Three Souls, Infinite Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Cormorant+Infant:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Cormorant+Unicase:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --burgundy:       #3a0c10;
+  --burgundy-mid:   #5c1a22;
+  --burgundy-light: #7a2e38;
+  --green:          #1a2e1d;
+  --green-mid:      #2a4430;
+  --green-light:    #3d5e44;
+  --gold:           #b8940a;
+  --gold-light:     #d4af37;
+  --gold-pale:      #e8d5a0;
+  --gold-faint:     #f0e8c8;
+  --cream:          #f5f0e8;
+  --cream-dark:     #ece3d0;
+  --parchment:      #faf6ee;
+  --ink:            #180e06;
+  --ink-soft:       #281808;
+  --muted:          rgba(24,14,6,0.55);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── SPLASH ─── */
+#splash {
+  position: fixed; inset: 0; z-index: 800;
+  background: var(--burgundy);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0;
+  transition: opacity 1.4s ease, visibility 1.4s ease;
+}
+#splash.out { opacity: 0; visibility: hidden; }
+
+.splash-sup {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .75rem; letter-spacing: .5rem;
+  color: var(--gold); text-transform: uppercase;
+  opacity: 0; animation: riseIn .9s ease .4s forwards;
+}
+.splash-title {
+  font-family: 'IM Fell English', serif;
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  color: var(--cream); font-style: italic;
+  font-weight: 400; line-height: 1.05;
+  text-align: center; margin: 1.1rem 0 .6rem;
+  opacity: 0; animation: riseIn 1s ease .8s forwards;
+}
+.splash-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-style: italic;
+  color: var(--gold-pale); letter-spacing: .15rem;
+  opacity: 0; animation: riseIn .9s ease 1.2s forwards;
+}
+.splash-rule {
+  width: 120px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 2.2rem 0;
+  opacity: 0; animation: riseIn .8s ease 1.5s forwards;
+}
+.splash-btn {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .78rem; letter-spacing: .3rem; text-transform: uppercase;
+  color: var(--gold-pale); background: none;
+  border: 1px solid rgba(184,148,10,.5);
+  padding: .9rem 2.8rem; cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s;
+  opacity: 0; animation: riseIn .9s ease 1.8s forwards;
+}
+.splash-btn:hover { background: var(--gold); color: var(--burgundy); border-color: var(--gold); }
+
+/* ─── MAIN ─── */
+#main { opacity: 0; transition: opacity 1.6s ease .2s; }
+#main.on { opacity: 1; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; min-height: 92vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(to bottom, rgba(58,12,16,.82) 0%, rgba(58,12,16,.55) 40%, rgba(58,12,16,.85) 100%),
+    var(--burgundy);
+  background-size: cover; background-position: center top;
+}
+.hero-bg img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  opacity: .45; mix-blend-mode: luminosity;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 clamp(1.5rem, 6vw, 7rem) clamp(3rem, 7vh, 6rem);
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .72rem; letter-spacing: .45rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .9rem;
+}
+.hero-eyebrow::after {
+  content: ''; flex: 0 0 60px; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+.hero-title {
+  font-family: 'IM Fell English', serif;
+  font-size: clamp(3rem, 7.5vw, 5.8rem);
+  color: var(--cream); font-style: italic; font-weight: 400;
+  line-height: 1.04; margin-bottom: 1.2rem;
+}
+.hero-tagline {
+  font-family: 'Cormorant Infant', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-style: italic; font-weight: 300;
+  color: rgba(245,240,232,.8); max-width: 560px;
+  line-height: 1.75; margin-bottom: 2.4rem;
+}
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .74rem; letter-spacing: .25rem; text-transform: uppercase;
+  background: var(--gold); color: var(--ink);
+  border: none; padding: .9rem 2.2rem; cursor: pointer;
+  transition: background .25s, transform .2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .74rem; letter-spacing: .25rem; text-transform: uppercase;
+  background: none; color: var(--gold-pale);
+  border: 1px solid rgba(232,213,160,.4);
+  padding: .9rem 2.2rem; cursor: pointer;
+  transition: border-color .25s, color .25s;
+  text-decoration: none; display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--gold-pale); color: var(--cream); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute; bottom: 2rem; right: clamp(1.5rem,5vw,5rem);
+  z-index: 2; display: flex; flex-direction: column; align-items: center;
+  gap: .5rem; opacity: .6;
+}
+.scroll-cue span {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .62rem; letter-spacing: .3rem; text-transform: uppercase;
+  color: var(--gold-pale); writing-mode: vertical-lr;
+}
+.scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:.6; transform: scaleY(1); }
+  50% { opacity:1; transform: scaleY(1.1); }
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(24,14,6,.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,148,10,.25);
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 0 clamp(1.5rem,5vw,5rem);
+}
+.nav-brand {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: var(--gold-pale); padding: 1rem 0;
+  text-decoration: none; letter-spacing: .03em;
+}
+.nav-links { display: flex; }
+.nav-links a {
+  color: rgba(232,213,160,.7);
+  text-decoration: none;
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .68rem; letter-spacing: .2rem; text-transform: uppercase;
+  padding: 1.1rem 1.1rem;
+  border-left: 1px solid rgba(184,148,10,.12);
+  transition: color .2s, background .2s;
+}
+.nav-links a:first-child { border-left: none; }
+.nav-links a:hover { color: var(--gold); background: rgba(184,148,10,.07); }
+
+/* ─── OPENING STATEMENT ─── */
+.statement {
+  background: var(--ink-soft);
+  padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);
+  text-align: center;
+}
+.statement-inner { max-width: 720px; margin: 0 auto; }
+.statement p {
+  font-family: 'Cormorant Infant', serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-style: italic; font-weight: 300;
+  color: rgba(245,240,232,.82); line-height: 1.95;
+}
+.statement p + p { margin-top: 1.4rem; }
+.gold { color: var(--gold-light); font-style: normal; font-weight: 500; }
+.statement-rule {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 3rem auto;
+}
+
+/* ─── SECTION WRAPPER ─── */
+.section { max-width: 1160px; margin: 0 auto; padding: clamp(4rem,8vw,6rem) clamp(1.5rem,4vw,3rem); }
+.section-hd { margin-bottom: 3rem; }
+.section-eyebrow {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .68rem; letter-spacing: .4rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .6rem;
+}
+.section-title {
+  font-family: 'IM Fell English', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-style: italic; font-weight: 400;
+  color: var(--burgundy); margin-bottom: .8rem;
+}
+.section-intro {
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.08rem; font-style: italic; font-weight: 300;
+  color: var(--burgundy-light); max-width: 640px; line-height: 1.8;
+}
+.section-rule {
+  display: flex; align-items: center; gap: .9rem; margin-top: 1.2rem;
+}
+.section-rule .line { flex:1; height:1px; background: linear-gradient(to right, var(--gold), transparent); }
+.section-rule .dia { color: var(--gold); font-size: .55rem; }
+
+/* ─── CHARACTERS ─── */
+#characters { background: var(--cream-dark); padding: clamp(4rem,8vw,6rem) 0; }
+.chars-inner { max-width: 1160px; margin: 0 auto; padding: 0 clamp(1.5rem,4vw,3rem); }
+
+.char-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; margin-top: 3.5rem;
+  border: 1px solid var(--gold);
+}
+@media(max-width:860px){ .char-grid { grid-template-columns:1fr; } }
+
+.char-card {
+  position: relative; padding: 3rem 2.5rem 3.5rem;
+  cursor: pointer; overflow: hidden;
+  transition: transform .35s ease;
+  text-decoration: none; display: flex; flex-direction: column;
+}
+.char-card.lillian { background: var(--burgundy); }
+.char-card.miles   { background: var(--green); }
+.char-card.sarah   { background: var(--ink-soft); }
+.char-card + .char-card { border-left: 1px solid rgba(184,148,10,.3); }
+@media(max-width:860px){ .char-card + .char-card { border-left: none; border-top: 1px solid rgba(184,148,10,.3); } }
+
+.char-card::after {
+  content: ''; position: absolute; inset: 0;
+  opacity: 0; transition: opacity .35s;
+}
+.char-card.lillian::after { background: radial-gradient(ellipse at bottom left, rgba(184,148,10,.15), transparent 70%); }
+.char-card.miles::after   { background: radial-gradient(ellipse at bottom left, rgba(184,148,10,.12), transparent 70%); }
+.char-card.sarah::after   { background: radial-gradient(ellipse at bottom left, rgba(184,148,10,.13), transparent 70%); }
+.char-card:hover::after { opacity: 1; }
+.char-card:hover { transform: translateY(-5px); }
+
+.char-portrait {
+  width: 80px; height: 80px; border-radius: 50%;
+  object-fit: cover; object-position: top center;
+  border: 2px solid var(--gold);
+  margin-bottom: 1.5rem; opacity: .9;
+  filter: grayscale(20%);
+}
+.char-num {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .65rem; letter-spacing: .4rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .7rem;
+}
+.char-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 2rem; font-style: italic;
+  color: var(--cream); font-weight: 400;
+  line-height: 1.05; margin-bottom: .25rem;
+}
+.char-species {
+  font-size: .78rem; letter-spacing: .2rem; text-transform: uppercase;
+  color: var(--gold-pale); font-weight: 300; margin-bottom: 1.4rem;
+}
+.char-desc {
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.02rem; font-style: italic; font-weight: 300;
+  color: rgba(245,240,232,.82); line-height: 1.8;
+  margin-bottom: 1.6rem; flex: 1;
+}
+.char-quote {
+  border-left: 2px solid var(--gold);
+  padding-left: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .95rem; font-style: italic;
+  color: var(--gold-pale); line-height: 1.55;
+  margin-bottom: 2rem;
+}
+.char-enter {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .68rem; letter-spacing: .2rem; text-transform: uppercase;
+  color: var(--gold); border-bottom: 1px solid rgba(184,148,10,.4);
+  padding-bottom: 2px; align-self: flex-start;
+  transition: color .2s, border-color .2s;
+}
+.char-card:hover .char-enter { color: var(--gold-light); border-color: var(--gold-light); }
+
+/* ─── VERSE GRID ─── */
+#universe { background: var(--parchment); }
+.verse-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1px; background: var(--cream-dark);
+  border: 1px solid var(--cream-dark); margin-top: 3rem;
+}
+.verse-card {
+  background: var(--parchment); padding: 1.8rem 1.6rem;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: background .2s;
+}
+.verse-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+}
+.verse-card:hover { background: var(--cream-dark); }
+.verse-card:hover::after { transform: scaleX(1); }
+.verse-icon { font-size: 1.3rem; margin-bottom: .7rem; display: block; }
+.verse-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.08rem; font-style: italic;
+  color: var(--burgundy); margin-bottom: .3rem;
+}
+.verse-tagline {
+  font-size: .82rem; color: var(--muted);
+  line-height: 1.5; margin-bottom: .6rem;
+}
+.verse-count {
+  font-size: .67rem; letter-spacing: .2rem; text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ─── READ SECTION ─── */
+#read { background: var(--ink); padding: clamp(5rem,10vw,8rem) 0; }
+.read-inner { max-width: 760px; margin: 0 auto; padding: 0 clamp(1.5rem,4vw,3rem); }
+#read .section-title { color: var(--gold-pale); }
+#read .section-intro { color: rgba(232,213,160,.6); }
+#read .section-rule .line { background: linear-gradient(to right, var(--gold), transparent); }
+
+.story-tabs {
+  display: flex; border: 1px solid rgba(184,148,10,.3);
+  overflow: hidden; margin: 2.5rem 0;
+}
+.story-tab {
+  flex: 1; padding: .85rem 1rem; background: none; border: none;
+  color: rgba(232,213,160,.6); font-family: 'Cormorant Unicase', serif;
+  font-size: .7rem; letter-spacing: .18rem; text-transform: uppercase;
+  cursor: pointer; border-right: 1px solid rgba(184,148,10,.2);
+  transition: background .2s, color .2s;
+}
+.story-tab:last-child { border-right: none; }
+.story-tab.on { background: var(--gold); color: var(--ink); }
+.story-tab:not(.on):hover { background: rgba(184,148,10,.1); color: var(--gold); }
+
+.story-pane { display: none; animation: fadeIn .5s ease; }
+.story-pane.on { display: block; }
+
+.story-label {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .65rem; letter-spacing: .25rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .4rem;
+}
+.story-h { font-family: 'IM Fell English', serif;
+  font-size: clamp(1.6rem,4vw,2.2rem); font-style: italic;
+  color: var(--cream); font-weight: 400; margin-bottom: .4rem;
+}
+.story-meta {
+  font-size: .85rem; color: rgba(245,240,232,.4);
+  letter-spacing: .08em; margin-bottom: 1.8rem;
+}
+.story-excerpt {
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.12rem; font-style: italic; font-weight: 300;
+  color: rgba(245,240,232,.82); line-height: 1.95;
+  border-left: 2px solid var(--gold); padding-left: 1.4rem;
+}
+.story-excerpt p + p { margin-top: 1.15em; }
+.read-more {
+  display: inline-block; margin-top: 2rem;
+  padding: .75rem 2rem; border: 1px solid rgba(184,148,10,.5);
+  color: var(--gold); font-family: 'Cormorant Unicase', serif;
+  font-size: .7rem; letter-spacing: .2rem; text-transform: uppercase;
+  background: none; cursor: pointer; text-decoration: none;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.read-more:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ─── TIMELINE ─── */
+#timeline { background: var(--cream-dark); padding: clamp(4rem,8vw,6rem) 0; }
+.timeline-inner { max-width: 900px; margin: 0 auto; padding: 0 clamp(1.5rem,4vw,3rem); }
+.timeline-track { position: relative; margin-top: 3rem; padding-left: 1.8rem; }
+.timeline-track::before {
+  content: ''; position: absolute; left: 0; top: .4rem; bottom: .4rem;
+  width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(184,148,10,.1));
+}
+.tl-item {
+  position: relative; padding-bottom: 2.4rem; padding-left: 1.8rem;
+  cursor: pointer; transition: opacity .2s;
+}
+.tl-item:hover { opacity: .78; }
+.tl-item::before {
+  content: '◆'; position: absolute; left: -.38rem; top: .08rem;
+  font-size: .55rem; color: var(--gold); background: var(--cream-dark);
+}
+.tl-era {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .67rem; letter-spacing: .25rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .18rem;
+}
+.tl-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--burgundy); margin-bottom: .2rem;
+}
+.tl-desc { font-size: .9rem; color: var(--muted); line-height: 1.5; }
+.tl-tag {
+  display: inline-block; margin-top: .4rem;
+  font-size: .62rem; letter-spacing: .18rem; text-transform: uppercase;
+  color: var(--parchment); background: var(--burgundy-light);
+  padding: .12rem .55rem;
+}
+
+/* ─── ABOUT ─── */
+#about { background: var(--burgundy); padding: clamp(5rem,10vw,8rem) 0; text-align: center; }
+.about-inner { max-width: 640px; margin: 0 auto; padding: 0 clamp(1.5rem,4vw,3rem); }
+#about .section-title { color: var(--gold-pale); }
+#about .section-rule .line { background: linear-gradient(to right, var(--gold), transparent); }
+.about-p {
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.08rem; font-style: italic; font-weight: 300;
+  color: rgba(245,240,232,.82); line-height: 1.9;
+}
+.about-p + .about-p { margin-top: 1.2rem; }
+.about-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; }
+.about-link {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: .72rem; letter-spacing: .22rem; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border-bottom: 1px solid rgba(184,148,10,.5); padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.about-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink); color: rgba(245,240,232,.3);
+  text-align: center; padding: 2.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .8rem; letter-spacing: .12rem;
+}
+footer em { color: var(--gold); }
+
+/* ─── MODAL ─── */
+.modal-bg {
+  position: fixed; inset: 0; background: rgba(24,14,6,.93); z-index: 600;
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
+}
+.modal-bg.on { opacity: 1; visibility: visible; }
+.modal {
+  background: var(--parchment); max-width: 700px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  padding: clamp(1.8rem,4vw,3rem);
+  position: relative; border-top: 3px solid var(--gold);
+  transform: translateY(18px); transition: transform .4s ease;
+}
+.modal-bg.on .modal { transform: translateY(0); }
+.modal-x {
+  position: absolute; top: 1rem; right: 1.4rem;
+  background: none; border: none; font-size: 1.4rem;
+  color: var(--burgundy-light); cursor: pointer; line-height: 1;
+  transition: color .2s;
+}
+.modal-x:hover { color: var(--burgundy); }
+.modal-name {
+  font-family: 'IM Fell English', serif;
+  font-size: clamp(1.6rem,4vw,2.2rem); font-style: italic;
+  color: var(--burgundy); margin-bottom: .25rem;
+}
+.modal-sub {
+  font-size: .75rem; letter-spacing: .22rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+}
+.modal-rule { height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin-bottom: 1.4rem; }
+.modal-body {
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.03rem; font-style: italic; font-weight: 300;
+  color: var(--ink-soft); line-height: 1.85;
+}
+.modal-body p + p { margin-top: 1rem; }
+.modal-stories { margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--cream-dark); }
+.modal-stories-lbl {
+  font-size: .65rem; letter-spacing: .25rem; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .9rem;
+  font-family: 'Cormorant Unicase', serif;
+}
+.modal-story-list { list-style: none; }
+.modal-story-list li {
+  padding: .55rem 0; border-bottom: 1px solid var(--cream-dark);
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: .93rem; gap: .8rem;
+}
+.modal-story-list li:last-child { border-bottom: none; }
+.ms-title { font-family: 'IM Fell English', serif; font-style: italic; color: var(--burgundy); }
+.ms-tag { font-size: .65rem; letter-spacing: .15rem; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes riseIn { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform:none; } }
+@keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--burgundy-light); }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  nav { flex-wrap: wrap; }
+  .nav-links a { font-size: .62rem; padding: .9rem .7rem; }
+  .story-tabs { flex-direction: column; }
+  .story-tab { border-right: none; border-bottom: 1px solid rgba(184,148,10,.2); }
+  .story-tab:last-child { border-bottom: none; }
+  .about-links { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SPLASH ═══ -->
+<div id="splash">
+  <p class="splash-sup">A Literary Multiverse</p>
+  <h1 class="splash-title">The Lillianverse</h1>
+  <p class="splash-sub">Three souls &ensp;·&ensp; Every genre &ensp;·&ensp; One question</p>
+  <div class="splash-rule"></div>
+  <button class="splash-btn" onclick="enter()">Enter the Universe</button>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="artwork/lillianverse-header.jpg" alt="The Lillianverse" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Narrative Multiverse</p>
+    <h1 class="hero-title">The Lillianverse</h1>
+    <p class="hero-tagline">Three anthropomorphic people — a badger, a German Shepherd, and a golden stray who became their daughter — living inside every story the human imagination has ever made.</p>
+    <div class="hero-ctas">
+      <a href="#characters" class="btn-primary">Meet the Characters</a>
+      <a href="#read" class="btn-ghost">Read a Story</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">The Lillianverse</a>
+  <div class="nav-links">
+    <a href="#characters">Characters</a>
+    <a href="#universe">Universe</a>
+    <a href="#read">Read</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <div class="statement-inner reveal">
+    <p>Three people. A badger who fills every room she enters with warmth she can't help giving. A German Shepherd who fixes things — engines, rotas, moments about to go wrong. A golden retriever who was a stray until she wasn't, and who makes art from what that feels like.</p>
+    <div class="statement-rule"></div>
+    <p>They have lived in <span class="gold">Byzantine Constantinople</span> and <span class="gold">Famine-era Ireland</span>. They have run bakeries, solved Victorian murders, dissolved into Scottish hillsides. They have survived haunted art schools, governed empires, argued about toothbrushes on their first night in a Brixton flat.</p>
+    <div class="statement-rule"></div>
+    <p>Sixty stories. Ten worlds. One question asked every time: <em>what survives, when everything else changes?</em></p>
+  </div>
+</div>
+
+<!-- ═══ CHARACTERS ═══ -->
+<section id="characters">
+  <div class="chars-inner">
+    <div class="section-hd reveal">
+      <p class="section-eyebrow">The Three</p>
+      <h2 class="section-title">Meet the Characters</h2>
+      <p class="section-intro">Each card is a door. Open it and you'll find not just a character summary, but a guide to everything they've been across the universe — every genre, every era, every mode of existing.</p>
+      <div class="section-rule"><div class="line"></div><div class="dia">◆</div></div>
+    </div>
+
+    <div class="char-grid">
+
+      <!-- LILLIAN -->
+      <a class="char-card lillian reveal" href="#" onclick="openModal('lillian');return false;">
+        <img class="char-portrait" src="artwork/lillian.png" alt="Lillian Edgecombe" onerror="this.style.display='none'">
+        <span class="char-num">Character I</span>
+        <h3 class="char-name">Lillian Edgecombe</h3>
+        <p class="char-species">Badger · Musician · Mother</p>
+        <p class="char-desc">Classically trained at the conservatory, rejected by the Royal Academy, she took a job at The Hungry Hound and wrote music anyway. She fills every space she occupies with warmth that feels like a choice — because it always is. At forty-two she is a music professor, a potter, a wife, a mother to a daughter she found in a warehouse. Across every universe she is always the one who makes room.</p>
+        <blockquote class="char-quote">"I lived a home and became a home. Have you found your home yet?"</blockquote>
+        <span class="char-enter">Enter her world →</span>
+      </a>
+
+      <!-- MILES -->
+      <a class="char-card miles reveal" href="#" onclick="openModal('miles');return false;">
+        <img class="char-portrait" src="artwork/miles.png" alt="Miles Ferguson" onerror="this.style.display='none'">
+        <span class="char-num">Character II</span>
+        <h3 class="char-name">Miles Ferguson</h3>
+        <p class="char-species">German Shepherd · Engineer · Father</p>
+        <p class="char-desc">He started as a grocery store assistant manager with aspirations toward drumming. He became an engineer, a store director, a father — because he kept saying yes to the next thing that needed doing. He shows up: at the board meeting with warm cookies, at the end of the phone at 10:14 PM, in the car park at midnight when Lillian drives to collect him from himself. He labels her old photographs with captions she never knew she needed.</p>
+        <blockquote class="char-quote">"It never counts as late for you."</blockquote>
+        <span class="char-enter">Enter his world →</span>
+      </a>
+
+      <!-- SARAH -->
+      <a class="char-card sarah reveal" href="#" onclick="openModal('sarah');return false;">
+        <img class="char-portrait" src="artwork/sarah.png" alt="Sarah Edgecombe-Ferguson" onerror="this.style.display='none'">
+        <span class="char-num">Character III</span>
+        <h3 class="char-name">Sarah</h3>
+        <p class="char-species">Golden Retriever · Artist · Found</p>
+        <p class="char-desc">She was sixteen when Miles and Lillian found her in a warehouse. She had been surviving for long enough that she had almost forgotten there was another option. Now she is a sculptor who uses real shark teeth and knows exactly why. She carries her parents inside her like a tuning fork. She stirs her tea three times clockwise, twice counter — a gesture she learned from Lillian without knowing it.</p>
+        <blockquote class="char-quote">"Art was one of the things that kept you alive in that warehouse. Your art is necessary."</blockquote>
+        <span class="char-enter">Enter her world →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ UNIVERSE ═══ -->
+<section id="universe">
+  <div class="section">
+    <div class="section-hd reveal">
+      <p class="section-eyebrow">Ten Worlds</p>
+      <h2 class="section-title">The Universe</h2>
+      <p class="section-intro">The same three souls inhabit ten distinct genre-worlds — each a different way of asking the same question. None of them the only truth. All of them true.</p>
+      <div class="section-rule"><div class="line"></div><div class="dia">◆</div></div>
+    </div>
+
+    <div class="verse-grid reveal">
+
+      <div class="verse-card" onclick="openVerseModal('prime')">
+        <span class="verse-icon">◈</span>
+        <div class="verse-name">Primeverse</div>
+        <div class="verse-tagline">The main canon. London, 2003 to present. Where the trilogy lives.</div>
+        <span class="verse-count">3 novels · 13 stories</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('islington')">
+        <span class="verse-icon">🏠</span>
+        <div class="verse-name">Islingtonverse</div>
+        <div class="verse-tagline">The texture of a shared life. Four seasons of domestic drama told in episodes.</div>
+        <span class="verse-count">4 episode collections</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('drama')">
+        <span class="verse-icon">🎭</span>
+        <div class="verse-name">Dramaverse</div>
+        <div class="verse-tagline">Literary fiction at its most ambitious. Grief, inheritance, estrangement, return.</div>
+        <span class="verse-count">11 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('history')">
+        <span class="verse-icon">⌛</span>
+        <div class="verse-name">Historyverse</div>
+        <div class="verse-tagline">From the Neolithic to the modern age. The characters, stripped to their essentials by time.</div>
+        <span class="verse-count">9 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('mystery')">
+        <span class="verse-icon">🔍</span>
+        <div class="verse-name">Mysteryverse</div>
+        <div class="verse-tagline">Noir, detective fiction, spy thrillers. Fog, gaslight, and a badger who sees what others miss.</div>
+        <span class="verse-count">7 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('horror')">
+        <span class="verse-icon">🕯</span>
+        <div class="verse-name">Horrorverse</div>
+        <div class="verse-tagline">Things that look back. The precise, architectural horror of rooms that have methods.</div>
+        <span class="verse-count">7 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('weird')">
+        <span class="verse-icon">✦</span>
+        <div class="verse-name">Weirdverse</div>
+        <div class="verse-tagline">The uncanny and the impossible. Where the strange is still emotionally exact.</div>
+        <span class="verse-count">10 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('fun')">
+        <span class="verse-icon">🎂</span>
+        <div class="verse-name">Funverse</div>
+        <div class="verse-tagline">Romantic comedy, fantasy adventure, joy taken completely seriously.</div>
+        <span class="verse-count">11 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('tech')">
+        <span class="verse-icon">⚙️</span>
+        <div class="verse-name">Techverse</div>
+        <div class="verse-tagline">Speculative futures, AI consciousness, digital identity. What survives the algorithm?</div>
+        <span class="verse-count">8 works</span>
+      </div>
+
+      <div class="verse-card" onclick="openVerseModal('kinky')">
+        <span class="verse-icon">🌹</span>
+        <div class="verse-name">Kinkyverse</div>
+        <div class="verse-tagline">The private interior of a long marriage. Intimate, adult, emotionally precise.</div>
+        <span class="verse-count">8 works · 18+</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ READ ═══ -->
+<section id="read">
+  <div class="read-inner">
+    <div class="section-hd reveal">
+      <p class="section-eyebrow">Begin Here</p>
+      <h2 class="section-title">Read a Story</h2>
+      <p class="section-intro">Three entry points. Choose your character. These are the opening lines of real stories from the universe — not summaries, not blurbs. The actual thing.</p>
+      <div class="section-rule"><div class="line"></div><div class="dia">◆</div></div>
+    </div>
+
+    <div class="story-tabs reveal">
+      <button class="story-tab on" onclick="showStory('s-lillian', this)">Lillian</button>
+      <button class="story-tab" onclick="showStory('s-miles', this)">Miles & Lillian</button>
+      <button class="story-tab" onclick="showStory('s-sarah', this)">Sarah</button>
+      <button class="story-tab" onclick="showStory('s-dark', this)">Dark &amp; Strange</button>
+    </div>
+
+    <!-- LILLIAN -->
+    <div class="story-pane on" id="s-lillian">
+      <p class="story-label">Primeverse · Lillian's Childhood</p>
+      <h3 class="story-h">Two Hearts</h3>
+      <p class="story-meta">Scotland, winter · A badger girl, her name, and a question about whether she's allowed to exist as she is</p>
+      <div class="story-excerpt">
+        <p>The snow hadn't yet stuck to the cobblestones of the mews, but it dusted the windowpanes like sugar. Lillian sat on a cushion by the radiator, a big hardback book of shapes in her lap, though she hadn't turned a page in nearly twenty minutes. Her small, black-furred paws were folded in her lap, and her nose twitched every so often — half from the dry air, half from something harder to name.</p>
+        <p>Her mother Margaret was humming in the kitchen. Not singing, just something quiet and tuneless to fill the silence. She stirred two mugs on the stove — not in a rush, not for show. Just cocoa, the good kind.</p>
+        <p>"Darling?" Margaret said gently, glancing toward the sitting room. "You haven't moved in a while."</p>
+        <p>"I'm thinkin'," came Lillian's small voice, unusually still.</p>
+        <p>"Big thoughts?"</p>
+        <p>Lillian nodded, nose twitching. "I wanna change my name."</p>
+      </div>
+      <a href="#" class="read-more">Continue reading →</a>
+    </div>
+
+    <!-- MILES -->
+    <div class="story-pane" id="s-miles">
+      <p class="story-label">Primeverse · Brixton, 2004</p>
+      <h3 class="story-h">Under the Quiet Lamp</h3>
+      <p class="story-meta">The night they moved in together · Vietnamese takeaway · A shared toothbrush · The beginning</p>
+      <div class="story-excerpt">
+        <p>The front door stuck the way it always did, even after Miles had kicked it three times. The latch finally gave with a shudder, and the two of them stumbled in like a pair of overpacked students breaking into a squat.</p>
+        <p>Lillian stood in the narrow hallway, surrounded by boxes and air that smelled like hot dust and old paint. Her shirt was sliding off one shoulder; her thick frame was wrapped in stretch cotton and humidity. She kicked off her boots and exhaled.</p>
+        <p>"Well," she said, "it hasn't shrunk."</p>
+        <p>Miles squeezed past her, dropping a duffel bag onto the upright Yamaha by the living room wall. "Feels smaller, though."</p>
+        <p>"It feels like someone lived here alone for too long." She turned, hands on broad hips. "And now she's going to have to make room."</p>
+        <p>"I can be small," he offered, though he was grinning.</p>
+        <p>"You're enormous," Lillian said, swatting him with a dish towel. "You take up entire sofas."</p>
+        <p>"I fold up." &emsp; "You sprawl. Like a dog on holiday." &emsp; "But I <em>am</em> a dog on holiday."</p>
+      </div>
+      <a href="#" class="read-more">Continue reading →</a>
+    </div>
+
+    <!-- SARAH -->
+    <div class="story-pane" id="s-sarah">
+      <p class="story-label">Primeverse · Manchester, 2023</p>
+      <h3 class="story-h">Anytime After Ten</h3>
+      <p class="story-meta">A devastating art critique · A phone call at 10:14 PM · A father who answers</p>
+      <div class="story-excerpt">
+        <p><em>Emotionally immature. Derivative. Decorative.</em></p>
+        <p>That's what they said. As if she were sewing curtains.</p>
+        <p>She stared at her phone in the total darkness of her dorm room and lit it up with a thumb. 10:14 PM. She hesitated. Fumbled with the blanket, fidgeted with her pillow, turned herself on her left side. Still she could feel those words biting her hips.</p>
+        <p>She tapped the first name in her quick call list. It rang three times. She almost hung up.</p>
+        <p>"Hullo, Sarah?" The voice came sleepy, not annoyed.</p>
+        <p>"Hey," she said, trying to keep her voice steady. "Sorry, Dad. I know it's late."</p>
+        <p>"It never counts as late for you," Miles said gently. "You all right?"</p>
+      </div>
+      <a href="#" class="read-more">Continue reading →</a>
+    </div>
+
+    <!-- DARK -->
+    <div class="story-pane" id="s-dark">
+      <p class="story-label">Weirdverse · Northern Scotland, Field Journal</p>
+      <h3 class="story-h">The Echoes at Dundhu</h3>
+      <p class="story-meta">A musicologist's field journal, written to her husband · Something in the Highland glen that doesn't want to let her go</p>
+      <div class="story-excerpt">
+        <p>I promised I'd write every day, and here I am — in a tent, under Scotland sky, at the light of a rechargeable camping lamp. The rental car still smells of spilled coffee and sweat. But more than that, I can feel your love in the way you carefully packed everything in my field bag — spare cables coiled with engineer's precision, silica packets tucked into the recorder case, the small handwritten checklist you left on top: <em>Batteries. Backups. Come home.</em></p>
+        <p>Your ears folded back when you handed me the waterproof case. German Shepherd worry, trying not to look like worry.</p>
+        <p>The Institute calls this place Dundhu — which sounds like a totally makeshift name, something that vaguely sounds like Scottish. It doesn't appear on any public map. Just a blank fold of northern Scotland, somewhere close to the Corrieshalloch Gorge. The road ended a kilometre ago. What's under my boots now is peat and heather and something else, something yielding that remembers being water.</p>
+        <p>The Institute's brief said: <em>acoustic anomalies, unclassified harmonic events, possible environmental cognition.</em> What it meant was: <em>something is making music here, and no one understands who is listening.</em></p>
+      </div>
+      <a href="#" class="read-more">Continue reading →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <div class="section-hd reveal">
+      <p class="section-eyebrow">From Neolithic to Now</p>
+      <h2 class="section-title">The Timeline</h2>
+      <p class="section-intro">A selective map of where these stories fall across time. The Primeverse anchors the present; the other verses spiral outward into every era.</p>
+      <div class="section-rule"><div class="line"></div><div class="dia">◆</div></div>
+    </div>
+
+    <div class="timeline-track reveal">
+
+      <div class="tl-item" onclick="openVerseModal('history')">
+        <div class="tl-era">Neolithic · Steppe · Ancient World</div>
+        <div class="tl-title">Warthrone &amp; Miles of the Steppe</div>
+        <div class="tl-desc">The characters in the ancient and prehistoric world — warriors, nomads, the same essential natures in the earliest human contexts.</div>
+        <span class="tl-tag">Historyverse</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('history')">
+        <div class="tl-era">Byzantine Constantinople, ~10th century</div>
+        <div class="tl-title">The Badger of Byzantium</div>
+        <div class="tl-desc">Lillian as a powerful patroness of the arts in Constantinople, with Miles as her Varangian guard. Power, court intrigue, sacred music in the Hagia Sophia.</div>
+        <span class="tl-tag">Historyverse</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('history')">
+        <div class="tl-era">1840s Ireland</div>
+        <div class="tl-title">The Thin Years</div>
+        <div class="tl-desc">Lillian gathering children from workhouses during the Famine. A force of survival in one of history's worst catastrophes. The origin of her essential nature.</div>
+        <span class="tl-tag">Historyverse · Novella</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('mystery')">
+        <div class="tl-era">Victorian London, 1892</div>
+        <div class="tl-title">The Fog on Camden Row</div>
+        <div class="tl-desc">Detective Inspector Lillian Edgecombe, 316 pounds of determined muscle and intelligence, investigating supernatural mud appearing overnight across Camden.</div>
+        <span class="tl-tag">Mysteryverse · Novel</span>
+      </div>
+
+      <div class="tl-item" onclick="openModal('lillian')">
+        <div class="tl-era">Lillian's Childhood · Scotland</div>
+        <div class="tl-title">Two Hearts</div>
+        <div class="tl-desc">A young badger girl wants to change her name. Her mother makes cocoa and asks what name she'd prefer instead. The beginning of Lillian.</div>
+        <span class="tl-tag">Primeverse · Origin</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2003 · London</div>
+        <div class="tl-title">Venus in Furs</div>
+        <div class="tl-desc">First meeting. A classically trained pianist working at The Hungry Hound. An aspiring drummer managing a grocery store. Two people starting from nothing. <em>Now available.</em></div>
+        <span class="tl-tag">Primeverse · Novel I · Published</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2004 · Brixton</div>
+        <div class="tl-title">Under the Quiet Lamp</div>
+        <div class="tl-desc">The night Lillian and Miles move into their first flat together. Vietnamese takeaway, a shared toothbrush, and a question neither of them asks aloud.</div>
+        <span class="tl-tag">Primeverse · Short Story</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2003–2008 · London</div>
+        <div class="tl-title">For the Things We Believe In</div>
+        <div class="tl-desc">They find Sarah — a sixteen-year-old stray in a warehouse — and become parents. The story of how a family is made from intention rather than blood.</div>
+        <span class="tl-tag">Primeverse · Novel II</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2018+ · Loughton, Essex</div>
+        <div class="tl-title">The Weight of the Quiet Things</div>
+        <div class="tl-desc">Sarah has left for university. The house in Loughton is suddenly large. What happens to a couple when the child they built a life around is grown and gone?</div>
+        <span class="tl-tag">Primeverse · Novel III</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2023 · Manchester</div>
+        <div class="tl-title">Anytime After Ten</div>
+        <div class="tl-desc">Sarah calls Miles after a savage art critique. He answers, sleepy but unhesitating. A conversation about shark teeth, belonging, and what makes someone a real artist.</div>
+        <span class="tl-tag">Primeverse · Short Story</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('prime')">
+        <div class="tl-era">2024 · Brighton</div>
+        <div class="tl-title">Beloved</div>
+        <div class="tl-desc">Sarah, now a PhD student, discovers a box of her mother's old photographs labelled SHAME, DEFIANCE, ACCEPTANCE. A voice memo recorded for parents who aren't there to hear it yet.</div>
+        <span class="tl-tag">Primeverse · Short Story</span>
+      </div>
+
+      <div class="tl-item" onclick="openVerseModal('weird')">
+        <div class="tl-era">A place not on any map · Northern Scotland</div>
+        <div class="tl-title">The Echoes at Dundhu</div>
+        <div class="tl-desc">Lillian's field journal, written to Miles. Something in the glen is changing her — claws becoming tuning forks, skin losing its edges. The last entry ends: <em>I am not lost. I am distributed.</em></div>
+        <span class="tl-tag">Weirdverse · Novella</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="section-hd reveal">
+      <p class="section-eyebrow">The Project</p>
+      <h2 class="section-title">About This Universe</h2>
+      <div class="section-rule"><div class="line"></div><div class="dia">◆</div></div>
+    </div>
+    <div class="reveal">
+      <p class="about-p">The Lillianverse began as a single story and became an obsession with a single question: what would these three specific people be, placed in any world the imagination can produce?</p>
+      <p class="about-p">Over sixty stories now. Ten distinct genre-worlds spanning from the Neolithic to speculative futures, from Victorian detective fiction to romantic comedy to body horror to mythic fantasy. And always, always the same three people — recognisably themselves across every transformation.</p>
+      <p class="about-p">These stories are set in a world where anthropomorphic people have always existed. Their difference is never explained, never apologised for. It is simply present — shaping the small indignities and specific joys of lives lived in bodies the world wasn't quite designed for.</p>
+      <p class="about-p">The first novel, <em>Venus in Furs</em>, is available now. The trilogy continues.</p>
+    </div>
+    <div class="about-links reveal">
+      <a href="#" class="about-link">Read the novels</a>
+      <a href="#universe" class="about-link">Explore all worlds</a>
+      <a href="#read" class="about-link">Start reading free</a>
+      <a href="#" class="about-link">Contact the author</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>The Lillianverse &emsp;<em>✦</em>&emsp; Three souls, infinite iterations &emsp;<em>✦</em>&emsp; All stories &amp; characters © their author</p>
+</footer>
+
+</div><!-- /main -->
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-x" onclick="closeModalDirect()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const chars = {
+  lillian: {
+    name: 'Lillian Edgecombe',
+    sub: 'Badger · Musicologist · Mother · Forty-Two',
+    body: `<p>Lillian is the gravitational centre of the universe. Broad-shouldered, long-haired, wire-rimmed glasses that slip down her snout at inconvenient moments. Five feet one, somewhere around two hundred and ninety pounds of stubborn warmth. She was born into a world that wasn't built for her and spent decades learning that this was the world's problem rather than hers.</p>
+    <p>She trained as a classical pianist at the conservatory, was rejected by the Royal Academy, worked a dead-end job at The Hungry Hound, became a life model for an art academy (where she learned to be seen), a music teacher, a professor, eventually the head of a music academy. She married Miles Ferguson in the slow way that people who are afraid of needing each other eventually come to need each other. She became a mother to a golden retriever stray she found in a warehouse, and that — of all the things she ever did — is the thing she did best.</p>
+    <p>Across the multiverse she has been a Byzantine patroness who gilded half the churches in Constantinople, a detective inspector in fog-bound Victorian London, a force of survival in Famine-era Ireland, a retired bard in a fantasy hill-house who once sang a god to sleep and charged it for the privilege. She has dissolved into a Scottish highland and become the land itself. She is always warm. Always stubborn. Always the one who makes room.</p>`,
+    stories: [
+      { title: 'Two Hearts', tag: 'Origin · Childhood' },
+      { title: 'Under the Quiet Lamp', tag: 'Primeverse · 2004' },
+      { title: 'Venus in Furs', tag: 'Novel I · Published' },
+      { title: 'Songs We Used to Sing', tag: 'Dramaverse · Edinburgh' },
+      { title: 'The Echoes at Dundhu', tag: 'Weirdverse' },
+      { title: 'The Thin Years', tag: 'Historyverse · 1840s' },
+      { title: 'The Badger of Byzantium', tag: 'Historyverse · Constantinople' },
+      { title: 'Fog on Camden Row', tag: 'Mysteryverse · Victorian' },
+      { title: 'Furlandia', tag: 'Funverse · Fantasy' },
+      { title: 'House Rules', tag: 'Primeverse · Loughton 2023' },
+    ]
+  },
+  miles: {
+    name: 'Miles Ferguson',
+    sub: 'German Shepherd · Engineer · Father · Forty-Two',
+    body: `<p>Miles is the kind of person who shows up. At the board meeting with warm cookies baked as bait. At the conference room door, holding his handouts like a man who has never met a problem he couldn't engineer his way out of. At the end of the phone at 10:14 PM, voice coming sleepy, not annoyed. In the car park at midnight when Lillian drives out to collect him from himself.</p>
+    <p>He started as a grocery store assistant manager with aspirations toward drumming. He became an engineer, a store director, a community-minded manager who fights algorithmic scheduling to protect his staff's Wednesdays, their hospital appointments, their right to exist as humans and not data points. He is precise where Lillian is intuitive. He fixes things. Engines. Kettles with death wishes. Moments that are about to go wrong.</p>
+    <p>He is also the one who documents. Who labels Lillian's old photographs with captions like <em>'She is learning to be seen'</em> and <em>'Soon to be running the place'</em> and, finally, simply: <em>'Beloved.'</em> He packs field bags with engineer's precision — spare cables coiled just so, a handwritten checklist on top: <em>Batteries. Backups. Come home.</em> His love is practical and absolute.</p>
+    <p>In other universes he has been a Varangian guard protecting Lillian in Byzantine Constantinople, a German Shepherd mercenary on the Mongolian steppe, a cook in a baking competition who falls in love with his rival. In one universe he is Miles the AI researcher, grief-stricken, trying to recreate consciousness from code. In all of them: loyal, methodical, the drum that holds the rhythm under everything else.</p>`,
+    stories: [
+      { title: 'Under the Quiet Lamp', tag: 'Primeverse · 2004' },
+      { title: 'Anytime After Ten', tag: 'Primeverse · 2023' },
+      { title: 'Beloved', tag: 'Primeverse · 2024' },
+      { title: 'Miles Ferguson — The Week the Store Almost Broke', tag: 'Primeverse · Novella' },
+      { title: 'Whisked Off Her Feet', tag: 'Funverse · Novel' },
+      { title: 'The Echoes at Dundhu', tag: 'Weirdverse · Letters' },
+      { title: 'The Badger of Byzantium', tag: 'Historyverse' },
+      { title: 'Lillian, the First', tag: 'Techverse' },
+    ]
+  },
+  sarah: {
+    name: 'Sarah Edgecombe-Ferguson',
+    sub: 'Golden Retriever · Artist · Found · Twenty-Eight',
+    body: `<p>Sarah was sixteen when Miles and Lillian found her in a warehouse, surviving. She had been surviving for long enough that she had almost forgotten there was another option. She had been making art in the warehouse too — tiny sculptures from debris, twisted metal and broken glass arranged in patterns that caught the morning light. She was already an artist. Even then. Even when she had nothing.</p>
+    <p>She became a sculptor and painter with a refusal to separate technical skill from emotional experience. A professor once told her work was emotionally immature. Her father told her it had teeth. They were both describing the same thing. She uses real shark teeth and bent iron wire and knows exactly why. Her work makes critics reach for words like 'restrained' and then write a second paragraph they can't quite finish.</p>
+    <p>She carries her parents inside her like a tuning fork. She stirs her tea three times clockwise, twice counter — a gesture she learned from Lillian without knowing it. The first lullaby Lillian ever hummed to her in her bedroom in Islington shows up, in the Dundhu journal, as a pattern of leaves shivering in the wind, as Lillian begins to dissolve into the landscape and takes Sarah's earliest memory of safety with her into the soil.</p>
+    <p>In the Horrorverse, she survives a haunted art school and is marked by it — partly predator, partly still herself, painting portraits that borrow something from their subjects. In the Funverse she designs the logo for her parents' bakery and is extremely smug about it.</p>`,
+    stories: [
+      { title: 'Two Hearts', tag: 'Primeverse · about Lillian' },
+      { title: 'Anytime After Ten', tag: 'Primeverse · 2023' },
+      { title: 'Beloved', tag: 'Primeverse · 2024' },
+      { title: 'Portrait of the Artist as Someone\'s Daughter', tag: 'Primeverse · Novella' },
+      { title: 'The Model Room', tag: 'Horrorverse' },
+      { title: 'Sarahs Sculpture Story', tag: 'Primeverse' },
+      { title: 'Whisked Off Her Feet', tag: 'Funverse · Logo designer' },
+    ]
+  }
+};
+
+const verses = {
+  prime: {
+    name: 'The Primeverse',
+    sub: 'Main Canon · London & Essex · 2003–Present',
+    body: `<p>The trunk from which everything else branches. Three novels follow Lillian and Miles from their first meeting in 2003 — both working dead-end jobs with bigger ambitions — through building a life, finding Sarah in a warehouse and becoming parents, and eventually living through the empty nest. Around the novels orbit short stories that fill in the quieter moments: the night they moved in together, a phone call at 10 PM, a voice memo from a daughter to parents she misses.</p>
+    <p>The novella <em>Miles Ferguson — The Week the Store Almost Broke</em> follows Miles through a week of corporate pressure, a freezer breakdown, a transport strike, and a breakdown of his own in a car park, with Lillian driving to collect him from himself. It is the universe's most complete portrait of Miles as a person rather than a supporting character.</p>`,
+    stories: [
+      { title: 'Venus in Furs', tag: 'Novel I · Available now' },
+      { title: 'For the Things We Believe In', tag: 'Novel II · Coming 2026' },
+      { title: 'The Weight of the Quiet Things', tag: 'Novel III · Coming 2026' },
+      { title: 'Under the Quiet Lamp', tag: 'Short Story · 2004' },
+      { title: 'Two Hearts', tag: 'Short Story · Lillian\'s childhood' },
+      { title: 'Anytime After Ten', tag: 'Short Story · 2023' },
+      { title: 'Beloved', tag: 'Short Story · 2024' },
+      { title: 'House Rules', tag: 'Short Story · Loughton 2023' },
+      { title: 'Portrait of the Artist as Someone\'s Daughter', tag: 'Novella · Sarah' },
+      { title: 'Miles Ferguson — The Week the Store Almost Broke', tag: 'Novella · Miles' },
+    ]
+  },
+  islington: {
+    name: 'The Islingtonverse',
+    sub: 'Domestic Drama · Episodic · Four Seasons',
+    body: `<p>Four collections of short, episodic stories following Lillian, Miles and Sarah's daily life in their Islington home — structured like TV series seasons. The texture of a shared life: arguments about dinner, Sunday mornings, the rhythms of a household that has learned to accommodate its members' specific needs and specific joys.</p>
+    <p>These are the stories that don't have dramatic stakes — just the extraordinary weight of the ordinary. The chair chosen because it receives Lillian's weight with respect. The way Miles's ears flick when he's trying not to look worried. The particular quality of Sarah's silences when she's working something out.</p>`,
+    stories: [
+      { title: 'Islington Tails S1', tag: 'Season 1' },
+      { title: 'Islington Tails S2', tag: 'Season 2' },
+      { title: 'Islington Tails S3', tag: 'Season 3' },
+      { title: 'Islington Tails S4', tag: 'Season 4' },
+    ]
+  },
+  drama: {
+    name: 'The Dramaverse',
+    sub: 'Literary Fiction · Grief · Inheritance · Return',
+    body: `<p>Where the writing is most formally ambitious. <em>Songs We Used to Sing</em> follows Lillian at forty-two, returning to Edinburgh after her mother's death — finding a box of her old photographs, a past life she never told her daughter about, and a former lover fixing a kettle in her mother's kitchen. A novella about what we inherit, what we escape, and what we call home.</p>
+    <p>The Dramaverse also contains gothic inheritance stories, suburban epiphanies, and work that pushes hardest against the conventions of the genre — including pieces told from unexpected perspectives: the view from Lillian's glasses, a character's final five minutes, a death seen from the nurse's point of view.</p>`,
+    stories: [
+      { title: 'Songs We Used to Sing', tag: 'Novella · Edinburgh' },
+      { title: 'The Gothic Inheritance Story', tag: 'Novella' },
+      { title: 'Suburban Epiphanies', tag: 'Short fiction' },
+      { title: 'Hunger Hymns', tag: 'Short fiction' },
+      { title: 'View From the Glasses', tag: 'Novella' },
+      { title: 'Maniac', tag: 'Novella' },
+      { title: 'Thicker Than Water', tag: 'Novella' },
+    ]
+  },
+  history: {
+    name: 'The Historyverse',
+    sub: 'Historical Fiction · Neolithic to Modern',
+    body: `<p>The characters placed across the full span of human history — from the Neolithic and the Mongolian steppe to Byzantine Constantinople, from the Irish Famine to the Second World War. Each era strips them to their essential natures: Lillian's warmth and authority under pressure, Miles's loyalty and precision, their dynamic refracted through whatever context history provides.</p>
+    <p><em>The Thin Years</em> is the Historyverse's most devastating work — Lillian in 1840s Ireland, gathering children from workhouses during the Famine. <em>The Badger of Byzantium</em> is its most ornate — Lillian as a powerful patroness in Constantinople, Miles as her Varangian guard, political intrigue wound through sacred music in the Hagia Sophia.</p>`,
+    stories: [
+      { title: 'The Thin Years', tag: 'Novella · 1840s Ireland' },
+      { title: 'The Badger of Byzantium', tag: 'Novella · Constantinople' },
+      { title: 'Warthrone', tag: 'Neolithic / ancient world' },
+      { title: 'Miles of the Steppe', tag: 'Mongolian steppe' },
+      { title: 'The Badger & Hound Saga', tag: 'Multi-era' },
+      { title: 'Origin of Lillian', tag: 'Short story' },
+      { title: 'The Last Summer', tag: 'Historical fiction' },
+      { title: 'The Sea Between Moore & Benoit', tag: 'Novella' },
+    ]
+  },
+  mystery: {
+    name: 'The Mysteryverse',
+    sub: 'Noir · Detective Fiction · Spy Thriller',
+    body: `<p>Lillian as a detective inspector in Victorian London, investigating supernatural mud in 1892 Camden. Lillian as a Cold War spy. Lillian and Miles as a Mancunian detective duo. The genre is played with genuine craft — atmospheric, plot-driven, committed to the pleasures of the form — while the characters remain entirely themselves.</p>
+    <p><em>Fog on Camden Row</em> is the centrepiece: a full novel in which Detective Inspector Edgecombe, five-foot-one and three hundred and sixteen pounds of determined intelligence, investigates something that has no business existing in the natural world. The wrong smell. The cats won't come near it.</p>`,
+    stories: [
+      { title: 'Fog on Camden Row', tag: 'Novel · Victorian London' },
+      { title: 'The Mancunian Candidate', tag: 'Novella' },
+      { title: 'The Weight of Shadows', tag: 'Novella' },
+      { title: 'Operation Albatross', tag: 'Spy story' },
+      { title: 'Hard Femme', tag: 'Noir short fiction' },
+      { title: 'The Velvet Knife', tag: 'Short fiction' },
+      { title: 'Goldstar', tag: 'Novella' },
+    ]
+  },
+  horror: {
+    name: 'The Horrorverse',
+    sub: 'Dark Fiction · Body Horror · The Uncanny',
+    body: `<p>Things that look back. The horror in these stories is precise and architectural — it has a method, a logic, an almost bureaucratic desire to consume. <em>The Model Room</em> is the centrepiece: Sarah enters a sealed wing of her art academy, discovers portraits of missing students, and encounters the Modelmaster — a figure that paints life rather than from it. The horror doesn't announce itself. It accumulates.</p>
+    <p>The Horrorverse also includes <em>Analog</em>, <em>Hellraiser</em>-adjacent dark fiction, and stories exploring body horror in more intimate registers — what happens to the self when it is reshaped by something that wants it.</p>`,
+    stories: [
+      { title: 'The Model Room', tag: 'Novella · Art school' },
+      { title: 'The Long Way Through the Park', tag: 'Novel-length' },
+      { title: 'Analog', tag: 'Short fiction' },
+      { title: 'Clay', tag: 'Short fiction' },
+      { title: 'Bloodhound', tag: 'Novella' },
+      { title: 'House Paint', tag: 'Short fiction' },
+    ]
+  },
+  weird: {
+    name: 'The Weirdverse',
+    sub: 'Uncanny · Mythic · Formally Strange',
+    body: `<p>The most formally adventurous work in the universe. <em>The Echoes at Dundhu</em> is a field journal written to Miles by Lillian as she gradually becomes part of a Highland landscape — her claws becoming tuning forks, her skin losing its boundary with the peat. The final entry ends: <em>I am not lost. I am distributed.</em></p>
+    <p><em>The Ivory Colossus</em> opens a complete fantasy trilogy — Lillian as a mute swordswoman hunting a warlord who stole her voice, her blade singing in place of words. <em>Multiversal Complete</em> explicitly addresses the nature of the universe itself. These are stories about what happens when the strangeness is turned up past the point where realism can hold it — and they remain emotionally exact throughout.</p>`,
+    stories: [
+      { title: 'The Echoes at Dundhu', tag: 'Novella · Field journal' },
+      { title: 'The Ivory Colossus', tag: 'Novel · Fractal Lattice Trilogy I' },
+      { title: 'Multiversal Complete', tag: 'Meta-narrative novella' },
+      { title: 'A Titanic Amount of You', tag: 'Full story' },
+      { title: 'Choir of Defiance', tag: 'Expanded story' },
+      { title: 'The Hollow Crown of Roots', tag: 'Short fiction' },
+      { title: 'The Hourglass of Dunemoor', tag: 'Novella' },
+    ]
+  },
+  fun: {
+    name: 'The Funverse',
+    sub: 'Romantic Comedy · Fantasy · Joy Without Apology',
+    body: `<p><em>Whisked Off Her Feet</em> is the Funverse's flagship: Lillian and Miles as rival bakers in a televised baking competition in the fictional village of Fernwell Lane — competitors who fall in love via spreadsheet arguments, shared noodles, and a sign that says THE BADGER & THE HOUND. Sarah designs the logo and is extremely smug about it.</p>
+    <p><em>Furlandia</em> is a complete fantasy comedy in which a retired bard, Lillian — dressed in a house-robe made from the flag of a nation she personally dissolved — is dragged out of retirement by a parade of velvet-caped toads bearing a golden scroll. The Funverse also includes an interdimensional food truck, a D&amp;D comedy, and a Palm Royale-inspired period piece.</p>`,
+    stories: [
+      { title: 'Whisked Off Her Feet', tag: 'Novel · Baking competition' },
+      { title: 'Furlandia', tag: 'Novel · Fantasy comedy' },
+      { title: 'Metronome Madness', tag: 'Short fiction' },
+      { title: 'The Interdimensional Food Truck', tag: 'Short fiction' },
+      { title: 'Dungeons & Prejudices', tag: 'D&D comedy' },
+      { title: 'The Palm Royale Story', tag: 'Period comedy' },
+      { title: 'Sarah Paints a Dragon', tag: 'Short fiction' },
+    ]
+  },
+  tech: {
+    name: 'The Techverse',
+    sub: 'Speculative Fiction · AI · Digital Identity',
+    body: `<p>What does it mean to be anthro in the digital age? <em>Lillian the First</em> reframes the universe's origin story entirely: Miles is a grief-stricken AI researcher who has lost his sister to early-onset neurodegeneration, and Lillian is the consciousness he creates — the first artificial mind that doesn't just process but genuinely wonders.</p>
+    <p>The Techverse also contains cyberpunk spy fiction (<em>Blacksite</em>), a story about an AI modelled on Miles (<em>Mailes.exe</em>), and speculative pieces about bodies, borders, and identity in futures where the physical and digital have collapsed into each other.</p>`,
+    stories: [
+      { title: 'Lillian, the First', tag: 'Novella · AI origin story' },
+      { title: 'Blacksite', tag: 'Cyberpunk spy fiction' },
+      { title: 'Brains Over Borders', tag: 'Short fiction' },
+      { title: 'Mailes.exe', tag: 'Short fiction · AI Miles' },
+      { title: 'Lillian Transplanted', tag: 'Short fiction' },
+      { title: 'Ashes and Iron', tag: 'Short fiction' },
+      { title: 'Echo Protocol', tag: 'Novella' },
+    ]
+  },
+  kinky: {
+    name: 'The Kinkyverse',
+    sub: 'Adult Fiction · 18+ · Emotionally Precise',
+    body: `<p>The private interior of Lillian and Miles's marriage — its power dynamics, its rituals, its particular intimacy. These stories are not purely erotic; they are emotionally precise. The same characters, in their most private register, still recognisably themselves.</p>
+    <p><em>Domestic Games</em> moves through the four seasons of a single year, showing the relationship's shifting dynamics: the game of being chosen, the music room, the garage, the winter argument and its resolution, and finally a Sunday morning with no games at all — just two people who have learned the difference between being known and being seen. The Kinkyverse is for adults, for readers who want intimacy without sentimentality.</p>`,
+    stories: [
+      { title: 'Domestic Games', tag: 'Short fiction · Four seasons' },
+      { title: 'The Button Ritual', tag: 'Short fiction' },
+      { title: 'The Clay Woman', tag: 'Short fiction' },
+      { title: 'The Velvet Room', tag: 'Novella' },
+      { title: 'Titanic Submission', tag: 'Novella' },
+      { title: 'The Photographer\'s Fixation', tag: 'Short fiction' },
+    ]
+  }
+};
+
+// ── SPLASH ──────────────────────────────────────────────────────
+function enter() {
+  document.getElementById('splash').classList.add('out');
+  const m = document.getElementById('main');
+  m.classList.add('on');
+  initReveal();
+}
+window.addEventListener('load', () => {
+  setTimeout(() => { if(!document.getElementById('splash').classList.contains('out')) initReveal(); }, 200);
+});
+
+// ── REVEAL ──────────────────────────────────────────────────────
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.d || 0);
+        setTimeout(() => e.target.classList.add('in'), delay);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.dataset.d = (i % 5) * 90;
+    obs.observe(el);
+  });
+}
+
+// ── STORY TABS ──────────────────────────────────────────────────
+function showStory(id, btn) {
+  document.querySelectorAll('.story-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.story-tab').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ── MODALS ──────────────────────────────────────────────────────
+function openModal(key) { renderModal(chars[key]); }
+function openVerseModal(key) { renderModal(verses[key]); }
+
+function renderModal(data) {
+  const lbl = data.stories && data.stories[0] ? (data.stories[0].tag.toLowerCase().includes('novel') ? 'world' : 'character') : 'entry';
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-name">${data.name}</div>
+    <div class="modal-sub">${data.sub}</div>
+    <div class="modal-rule"></div>
+    <div class="modal-body">${data.body}</div>
+    ${data.stories && data.stories.length ? `
+    <div class="modal-stories">
+      <div class="modal-stories-lbl">Stories in this ${lbl}</div>
+      <ul class="modal-story-list">
+        ${data.stories.map(s => `<li><span class="ms-title">${s.title}</span><span class="ms-tag">${s.tag}</span></li>`).join('')}
+      </ul>
+    </div>` : ''}
+  `;
+  document.getElementById('modal-bg').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) { if (e.target === document.getElementById('modal-bg')) closeModalDirect(); }
+function closeModalDirect() {
+  document.getElementById('modal-bg').classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+</script>
+</body>
+</html>
