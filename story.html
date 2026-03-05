@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading | Lillianverse</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/story.css">
+</head>
+<body>
+
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <img src="artwork/lillianverse-header.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+  <div class="site-header-overlay">
+    <a href="index.html" class="site-header-title">The Lillianverse</a>
+    <span class="site-header-sub">Three souls &ensp;·&ensp; Every genre &ensp;·&ensp; One question</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="site-nav" id="site-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="station.html">All Universes</a>
+  <span class="nav-spacer"></span>
+</nav>
+
+<!-- STORY HEADER (populated by JS) -->
+<div class="story-header" id="story-header" style="display:none">
+  <div class="story-header-inner">
+    <p class="story-header-eyebrow" id="story-eyebrow">Story</p>
+    <h1 class="story-header-title" id="story-title">Loading…</h1>
+    <p class="story-header-meta" id="story-meta"></p>
+  </div>
+</div>
+
+<!-- STORY BODY -->
+<main>
+  <div class="story-body" id="story-body">
+    <p style="font-family:var(--font-infant);font-style:italic;color:var(--muted);text-align:center;padding:4rem 0;">
+      Loading story…
+    </p>
+  </div>
+
+  <div class="story-footer" id="story-footer" style="display:none">
+    <a class="story-footer-back" id="story-back" href="index.html">← Back to universe</a>
+    <span class="story-footer-note">© All stories and characters are the property of their author.</span>
+  </div>
+</main>
+
+<!-- SITE FOOTER -->
+<footer class="site-footer">
+  <a href="index.html" class="footer-brand">The Lillianverse</a>
+  <nav class="footer-links">
+    <a href="#">Ko-fi</a>
+    <a href="#">Amazon KDP</a>
+    <a href="#">Discord</a>
+    <a href="#">RedBubble</a>
+  </nav>
+  <p class="footer-copy">© The Lillianverse · All stories and characters are the property of their author.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+// ── READ URL PARAMS ──────────────────────────────────────────────
+const params  = new URLSearchParams(window.location.search);
+const file    = params.get('file');    // e.g. "PRIMEVERSE/house_rules.md"
+const verse   = params.get('verse');   // e.g. "PRIMEVERSE"
+const title   = params.get('title');   // display title
+const meta    = params.get('meta');    // subtitle / era / context
+
+// ── READING PROGRESS ─────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrolled = (document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+  document.getElementById('reading-progress').style.width = scrolled + '%';
+});
+
+// ── POPULATE HEADER ──────────────────────────────────────────────
+if (title) {
+  document.title = title + ' | Lillianverse';
+  document.getElementById('story-title').textContent = title;
+  document.getElementById('story-header').style.display = '';
+}
+if (verse) {
+  document.getElementById('story-eyebrow').textContent = verse.charAt(0) + verse.slice(1).toLowerCase();
+  // Update nav back link
+  const backEl = document.getElementById('story-back');
+  backEl.href  = verse.toLowerCase() + '/index.html';
+  backEl.textContent = '← Back to ' + verse.charAt(0) + verse.slice(1).toLowerCase();
+
+  // Highlight active nav entry if present
+  document.querySelectorAll('nav.site-nav a').forEach(a => {
+    if (a.href.includes(verse.toLowerCase())) a.classList.add('active');
+  });
+}
+if (meta) {
+  document.getElementById('story-meta').textContent = meta;
+}
+
+// ── FETCH & RENDER STORY ─────────────────────────────────────────
+if (file) {
+  fetch(file)
+    .then(r => {
+      if (!r.ok) throw new Error('File not found: ' + file);
+      return r.text();
+    })
+    .then(text => {
+      // Configure marked
+      marked.setOptions({ breaks: true, gfm: true });
+
+      // If it's a plain txt file, wrap in paragraphs
+      const isMarkdown = file.endsWith('.md');
+      let html;
+      if (isMarkdown) {
+        html = marked.parse(text);
+      } else {
+        // Plain text: split on double newlines, wrap each block in <p>
+        html = text
+          .split(/\n{2,}/)
+          .map(block => block.trim())
+          .filter(Boolean)
+          .map(block => '<p>' + block.replace(/\n/g, '<br>') + '</p>')
+          .join('\n');
+      }
+
+      document.getElementById('story-body').innerHTML = html;
+      document.getElementById('story-footer').style.display = '';
+
+      // If header wasn't set from params, try to extract title from first h1
+      if (!title) {
+        const firstH1 = document.querySelector('.story-body h1');
+        if (firstH1) {
+          document.title = firstH1.textContent + ' | Lillianverse';
+          document.getElementById('story-title').textContent = firstH1.textContent;
+          document.getElementById('story-header').style.display = '';
+          firstH1.remove(); // avoid duplicate
+        }
+      }
+    })
+    .catch(err => {
+      const isFile = location.protocol === 'file:';
+      document.getElementById('story-body').innerHTML = isFile
+        ? '<div style="font-family:var(--font-infant);font-style:italic;color:var(--muted);text-align:center;padding:4rem 2rem;max-width:520px;margin:0 auto;line-height:1.8">'
+          + '<p style="font-size:1.1rem;margin-bottom:1.5rem">Stories can\'t load when the site is opened directly from a file.</p>'
+          + '<p>Double-click <strong style="font-style:normal;color:var(--burgundy)">start.bat</strong> in the repo2 folder — it will open everything in your browser automatically.</p>'
+          + '<p style="margin-top:1.5rem;font-size:.85rem;opacity:.6">(This is a browser security restriction, not a bug in the site.)</p>'
+          + '</div>'
+        : '<p style="font-family:var(--font-infant);font-style:italic;color:var(--muted);text-align:center;padding:3rem 0;">'
+          + 'This story could not be loaded.<br><small style="font-size:.8em;opacity:.6">' + err.message + '</small></p>';
+    });
+} else {
+  document.getElementById('story-body').innerHTML =
+    '<p style="font-family:var(--font-infant);font-style:italic;color:var(--muted);text-align:center;padding:3rem 0;">' +
+    'No story file specified. Return to a <a href="station.html">universe</a> and choose a story.</p>';
+}
+</script>
+</body>
+</html>
