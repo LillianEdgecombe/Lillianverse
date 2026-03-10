@@ -284,6 +284,24 @@ footer.site-footer {
   border-top: 1px solid rgba(184,148,10,.08);
 }
 
+/* ── PLATFORM TAGS ── */
+.story-tag-wattpad {
+  font-family: var(--font-caps);
+  font-size: .6rem; letter-spacing: .18rem; text-transform: uppercase;
+  color: var(--parchment); background: #e06000;
+  padding: .15rem .5rem; white-space: nowrap;
+}
+.story-tag-kdp {
+  font-family: var(--font-caps);
+  font-size: .6rem; letter-spacing: .18rem; text-transform: uppercase;
+  color: var(--parchment); background: #232f3e;
+  padding: .15rem .5rem; white-space: nowrap;
+}
+.story-item-ext {
+  font-size: .65rem; letter-spacing: .12rem; text-transform: uppercase;
+  color: rgba(24,14,6,.3); margin-top: .15rem;
+}
+
 /* ── UTILITY ── */
 .gold { color: var(--gold-light); }
 .italic { font-style: italic; }
